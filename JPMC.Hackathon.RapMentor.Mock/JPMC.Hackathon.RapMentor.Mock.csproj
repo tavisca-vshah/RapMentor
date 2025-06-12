@@ -5,10 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.BedrockAgentRuntime" Version="4.0.4.2" />
-    <PackageReference Include="AWSSDK.BedrockRuntime" Version="4.0.0.7" />
+    <PackageReference Include="Bogus" Version="35.6.3" />
   </ItemGroup>
-	
+
   <ItemGroup>
     <ProjectReference Include="..\JPMC.Hackathon.RapMentor.Contract\JPMC.Hackathon.RapMentor.Contract.csproj" />
   </ItemGroup>

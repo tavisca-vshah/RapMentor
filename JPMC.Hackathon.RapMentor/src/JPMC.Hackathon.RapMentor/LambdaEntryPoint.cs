@@ -1,4 +1,5 @@
-using Amazon.Lambda.AspNetCoreServer;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace JPMC.Hackathon.RapMentor
 {
@@ -21,18 +22,13 @@ namespace JPMC.Hackathon.RapMentor
         // 
         // Note: When using the AWS::Serverless::Function resource with an event type of "HttpApi" then payload version 2.0
         // will be the default and you must make Amazon.Lambda.AspNetCoreServer.APIGatewayHttpApiV2ProxyFunction the base class.
-
-    
-        /// <summary>
-        /// The builder has configuration, logging and Amazon API Gateway already configured. The startup class
-        /// needs to be configured in this method using the UseStartup<>() method.
-        /// </summary>
-        /// <param name="builder">The IWebHostBuilder to configure.</param>
+        Amazon.Lambda.AspNetCoreServer.APIGatewayProxyFunction
+    {
         protected override void Init(IWebHostBuilder builder)
         {
-            builder
-                .UseStartup<Startup>();
+            builder.UseContentRoot(Directory.GetCurrentDirectory())
+                   .UseStartup<Startup>()
+                   .UseLambdaServer();
         }
-  
     }
 }

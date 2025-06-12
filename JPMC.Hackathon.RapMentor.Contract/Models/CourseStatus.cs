@@ -1,7 +1,8 @@
 ﻿namespace JPMC.Hackathon.RapMentor.Contract.Models
 {
-    public class CourseDetail
+    public enum CourseStatus
     {
-        public string Id { get; set; }
+        Draft,
+        Published
     }
 }

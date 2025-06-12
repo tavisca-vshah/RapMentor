@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.36105.23 d17.13
+VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPMC.Hackathon.RapMentor", "JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.csproj", "{68D529AA-E1D3-472D-A03C-F8CDDFF54AEC}"
 EndProject
@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPMC.Hackathon.RapMentor.Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPMC.Hackathon.RapMentor.Contract", "JPMC.Hackathon.RapMentor.Contract\JPMC.Hackathon.RapMentor.Contract.csproj", "{1C430A38-6289-4DAC-8BA3-E0CE42B5B4AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPMC.Hackathon.RapMentor.Adapters", "JPMC.Hackathon.RapMentor.Adapters\JPMC.Hackathon.RapMentor.Adapters.csproj", "{50F47E06-EA7A-4D44-BD02-39B21567B085}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPMC.Hackathon.RapMentor.Adapter.Dynamodb", "JPMC.Hackathon.RapMentor.Adapters\JPMC.Hackathon.RapMentor.Adapter.Dynamodb.csproj", "{50F47E06-EA7A-4D44-BD02-39B21567B085}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPMC.Hackathon.RapMentor.Mock", "JPMC.Hackathon.RapMentor.Mock\JPMC.Hackathon.RapMentor.Mock.csproj", "{8513B278-A944-49EE-8358-3CF53D0782B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{50F47E06-EA7A-4D44-BD02-39B21567B085}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50F47E06-EA7A-4D44-BD02-39B21567B085}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50F47E06-EA7A-4D44-BD02-39B21567B085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8513B278-A944-49EE-8358-3CF53D0782B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8513B278-A944-49EE-8358-3CF53D0782B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8513B278-A944-49EE-8358-3CF53D0782B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8513B278-A944-49EE-8358-3CF53D0782B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
