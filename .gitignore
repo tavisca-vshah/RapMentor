@@ -351,9 +351,6 @@ MigrationBackup/
 .ionide/
 
 .vs/*
-/src/Tavisca.FeatureConfigurations.UnitTests/CodeCoverage
-/src/Tavisca.FeatureConfigurations.Sdk.UnitTests/CodeCoverage
-/src/Tavisca.FeatureConfigurations.Cache.Sdk.UnitTests/CodeCoverage
 *.bak
 /.vs/JPMC.Hackathon.RapMentor/v17/DocumentLayout.backup.json
 /.vs/JPMC.Hackathon.RapMentor/v17/DocumentLayout.json
