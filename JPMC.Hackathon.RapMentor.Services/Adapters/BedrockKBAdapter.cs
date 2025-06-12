@@ -82,8 +82,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
         public static async Task<string> GenerateMessageAsync(string context, QnAPrompt question)
         {
             question.Prompts.Add(new Prompt { Role = "Assistant", Content = context });
-            var client = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
-
+            
             question.Prompts.Add(new Prompt { Role = "System", Content = @"
                 You are an AI Q&A bot with RAG capabilities. Provide accurate, professional responses using company data first, then supplement with external sources when needed.
 
@@ -129,8 +128,15 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 ContentType = "application/json"
             };
 
+            return await InvokeModelAsync(request);
+
+        }
+
+        private static async Task<string> InvokeModelAsync(InvokeModelRequest request)
+        {
             try
             {
+                var client = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
                 // Send the request to the Bedrock Runtime and wait for the response.
                 var response = await client.InvokeModelAsync(request);
 
@@ -146,8 +152,9 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 Console.WriteLine($"ERROR: Can't invoke '{modelArn}'. Reason: {e.Message}");
                 throw;
             }
-
         }
+
+
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿using JPMC.Hackathon.RapMentor.Adapter.Dynamodb;
 using JPMC.Hackathon.RapMentor.Contract.Interfaces;
 using JPMC.Hackathon.RapMentor.Contract.Models;
+using JPMC.Hackathon.RapMentor.Services.Adapters;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,5 +25,9 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
             return await _courseRepository.GetAsync(id);
         }
 
+        public Task<List<string>> GetCourseHeadings(CourseHeadersRequest request)
+        {
+            return BedrockKBAdapter.GetCourseHeadings(request);
+        }
     }
 }

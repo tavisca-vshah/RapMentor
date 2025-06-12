@@ -2,6 +2,7 @@
 using JPMC.Hackathon.RapMentor.Contract.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -64,8 +65,9 @@ namespace JPMC.Hackathon.RapMentor.Controllers
 
         // POST api/<CourseController>
         [HttpPost("headings")]
-        public void Headings([FromBody] string value)
+        public async Task<List<String>> Headings([FromBody] CourseHeadersRequest request)
         {
+            return await _courseService.GetCourseHeadings(request);
         }
     }
 }
