@@ -1,6 +1,7 @@
 ﻿using JPMC.Hackathon.RapMentor.Contract.Interfaces;
 using JPMC.Hackathon.RapMentor.Contract.Models;
 using JPMC.Hackathon.RapMentor.Services.Adapters;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace JPMC.Hackathon.RapMentor.Services.Services
@@ -9,7 +10,9 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
     {
         public async Task<string> GetRagQnAAsync(QnAPrompt input)
         {
-            return await BedrockKBAdapter.GetRagQnAAsync(input);
+            var res =  await BedrockKBAdapter.GetRagQnAAsync(input.Prompts.Last().Content);
+            return await BedrockKBAdapter.GenerateMessageAsync(res, input);
         }
+       
     }
 }
