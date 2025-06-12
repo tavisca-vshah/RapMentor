@@ -84,10 +84,8 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
         {
 
             var messages = new List<Prompt>();
-            messages.Add(new Prompt
-            {
-                Role = "System",
-                Content = @"
+
+            var sysPrompt = @"
                 You are an AI Q&A bot with RAG capabilities. Provide accurate, professional responses using company data first, then supplement with external sources when needed.
 
                 **Response Priority:**
@@ -105,27 +103,22 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 **Example:**
                 User: 'What is ID Everywhere Authentication System?'
                 Response: 'ID Everywhere Authentication provides secure identity verification across platforms, featuring multi-factor authentication (MFA), single sign-on (SSO), federated identity management, and adaptive security protocols.'
-                "
-            });
+                ";
 
-            question.Prompts.Insert(0, messages[0]);
-            question.Prompts.Add(new Prompt { Role = "Assistant", Content = context });
+            question.Prompts.Add(new Prompt { role = "Assistant", content = context });
             int promptsSize = question.Prompts.Count;
-            string que = question.Prompts[promptsSize - 2].Content;
+            string que = question.Prompts[promptsSize - 2].content;
             // Define the user message.
-            var userMessage = $"Use the context below if relevant. Context:\n\"\"\"\n{JsonSerializer.Serialize(question)}\n\"\"\"\n\n Question: {que}";
-
-            messages.Add(new Prompt { Role = "user", Content = userMessage });
+            var userMessage = $"{sysPrompt} + \n\"\"\"\n Use the context below if relevant. Context:\n\"\"\"\n{JsonSerializer.Serialize(question)}\n\"\"\"\n\n Question: {que}";
+            
+            messages.Add(new Prompt { role = "user", content = userMessage });
             //Format the request payload using the model's native structure.
             var nativeRequest = JsonSerializer.Serialize(new
             {
                 anthropic_version = "bedrock-2023-05-31",
                 max_tokens = 512,
                 temperature = 0.5,
-                messages = new[]
-                    {
-                            new { role = "user", content = userMessage }
-                    }
+                messages = messages
             });
 
             // Create a request with the model ID and the model's native request payload.
@@ -142,29 +135,38 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
 
         public static async Task<List<string>> GetCourseHeadings(CourseHeadersRequest courseHeadersRequest)
         {
-            var ragPrompt = new
+            var messages = new List<Prompt> { new Prompt
             {
-                input = courseHeadersRequest,
-
-                rag_instruction = "Using the internal company knowledge base stored in the vector database, generate a structured employee training course. The course should:\n\n" +
-             "- Be based on the topic provided in the 'Prompt'\n" +
-             "- Focus on the listed 'Skills'\n" +
-             "- Match the specified 'Level' of difficulty\n" +
-             "- Fit within the 'Duration' timeframe\n" +
-             "- Include the 'AdditionalModules' as part of the curriculum\n\n" +
-             "Ensure the content is professional, clear, and tailored for internal employee development. If internal data is insufficient, supplement with verified external sources and cite them clearly.\n\n" +
-             "give me comma seperated headerings"
-             };
+                role = "user",
+                content = @"
+                    You are a course architect and learning experience designer. Your task is to generate a comma-separated list of high-level topic headings for a course based on the provided context.
+ 
+                    Design the course using the following structure:
+                    1. Course Overview
+                    2. Technologies Used
+                    3. Services or Tools Used
+                    4. System Architecture
+                    5. Core Functional Modules (based on the course prompt and skills)
+                    6. Additional Modules (based on the 'Additional Modules' input)
+ 
+                    Ensure the course is appropriate for the specified level and duration. The output should be a single, logically ordered, comma-separated list of topic headings.
+ 
+                    Example:
+                    For a course on 'Learn Web Development' with skills 'HTML, CSS', and additional modules 'Responsive Design, SEO Basics', the output might be:
+                    Course Overview, Technologies Used, Services or Tools Used, System Architecture, HTML Basics, CSS Fundamentals, Building Your First Web Page, Responsive Design, SEO Basics
+ 
+                    Respond with only the topic headings, separated by commas. Do not include any explanations or formatting.
+                    
+                    query: " + JsonSerializer.Serialize(courseHeadersRequest)
+            }
+            };
 
             var nativeRequest = JsonSerializer.Serialize(new
             {
                 anthropic_version = "bedrock-2023-05-31",
                 max_tokens = 512,
                 temperature = 0.5,
-                messages = new[]
-                {
-                      new { role = "user", content = JsonSerializer.Serialize(ragPrompt) }
-                }
+                messages = messages
             });
 
             // Create a request with the model ID and the model's native request payload.
@@ -178,6 +180,50 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
             var res = await InvokeModelAsync(request);
             return res.Split(",").ToList();
 
+        }
+
+        public static async Task<string> Getheadercontent(HeaderContentRequest courseHeadersRequest)
+        {
+            var messages = new List<Prompt> { new Prompt
+            {
+                role = "user",
+                content = $@"
+                You are a course content generator. Your task is to create detailed, beginner-friendly content for a specific course topic, based on the overall course context.
+ 
+                Guidelines:
+                - Content specific to header provided in query
+                - Write in a clear, instructional tone suitable for the intended audience.
+                - Use markdown formatting (## for headings, bullet points, numbered lists, etc.).
+                - Include relevant examples, use cases, or scenarios to enhance understanding.
+                - If applicable, include step-by-step explanations, frameworks, or best practices.
+                - Ensure the content aligns with the course's skills, level, and duration.
+                - Adapt the tone and depth based on whether the topic is technical, business-oriented, or soft-skill related.
+                - Keep the total content under 700 words or 4,000 characters to ensure readability and UI compatibility.
+ 
+                Do not include introductory or closing remarks unless the topic itself requires it.
+                
+               
+                Query: " + JsonSerializer.Serialize(courseHeadersRequest)
+            }
+            };
+
+            var nativeRequest = JsonSerializer.Serialize(new
+            {
+                anthropic_version = "bedrock-2023-05-31",
+                max_tokens = 512,
+                temperature = 0.5,
+                messages = messages
+            });
+
+            // Create a request with the model ID and the model's native request payload.
+            var request = new InvokeModelRequest()
+            {
+                ModelId = modelArn,
+                Body = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(nativeRequest)),
+                ContentType = "application/json"
+            };
+
+            return await InvokeModelAsync(request);
         }
 
         private static async Task<string> InvokeModelAsync(InvokeModelRequest request)

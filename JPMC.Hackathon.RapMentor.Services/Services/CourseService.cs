@@ -29,5 +29,10 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
         {
             return BedrockKBAdapter.GetCourseHeadings(request);
         }
+
+        public Task<string> GetHeaderContent(HeaderContentRequest request)
+        {
+            return BedrockKBAdapter.Getheadercontent(request);
+        }
     }
 }

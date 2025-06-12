@@ -8,7 +8,7 @@ namespace JPMC.Hackathon.RapMentor.Contract.Models
     }
     public class Prompt
     {
-        public string Role { get; set; }
-        public string Content { get; set; }
+        public string role { get; set; }
+        public string content { get; set; }
     }
 }
