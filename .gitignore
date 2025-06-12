@@ -350,6 +350,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
+.vs/*
 /src/Tavisca.FeatureConfigurations.UnitTests/CodeCoverage
 /src/Tavisca.FeatureConfigurations.Sdk.UnitTests/CodeCoverage
 /src/Tavisca.FeatureConfigurations.Cache.Sdk.UnitTests/CodeCoverage

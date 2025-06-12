@@ -67,11 +67,6 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
         }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
-        }
       }
     },
     "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Services\\JPMC.Hackathon.RapMentor.Services.csproj": {
@@ -123,6 +118,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "AWSSDK.BedrockAgentRuntime": {
+              "target": "Package",
+              "version": "[4.0.4.2, )"
+            },
+            "AWSSDK.BedrockRuntime": {
+              "target": "Package",
+              "version": "[4.0.0.7, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -140,11 +145,6 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
         }
       }
     }

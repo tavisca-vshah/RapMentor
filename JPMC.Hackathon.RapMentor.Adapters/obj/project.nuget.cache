@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "n+3TUp02SFo=",
+  "dgSpecHash": "JKONUe9Yn+M=",
   "success": true,
-  "projectFilePath": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapter.Dynamodb.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\N747459\\.nuget\\packages\\awssdk.core\\4.0.0.9\\awssdk.core.4.0.0.9.nupkg.sha512",
-    "C:\\Users\\N747459\\.nuget\\packages\\awssdk.dynamodbv2\\4.0.1.5\\awssdk.dynamodbv2.4.0.1.5.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapters.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
