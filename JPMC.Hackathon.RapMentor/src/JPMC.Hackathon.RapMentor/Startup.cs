@@ -48,6 +48,7 @@ namespace JPMC.Hackathon.RapMentor
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors();
             app.UseHttpsRedirection();
 
             app.UseRouting();
