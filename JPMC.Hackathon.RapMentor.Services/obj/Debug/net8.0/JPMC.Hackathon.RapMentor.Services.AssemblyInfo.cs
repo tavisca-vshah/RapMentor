@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JPMC.Hackathon.RapMentor.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c21564760eb63da3d191bebf9c8263825361ef97")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+661169f12f73192be80264de0c93bc9b7175e6ca")]
 [assembly: System.Reflection.AssemblyProductAttribute("JPMC.Hackathon.RapMentor.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JPMC.Hackathon.RapMentor.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

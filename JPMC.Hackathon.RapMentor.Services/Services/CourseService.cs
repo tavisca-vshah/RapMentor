@@ -1,6 +1,8 @@
 ﻿using JPMC.Hackathon.RapMentor.Adapter.Dynamodb;
 using JPMC.Hackathon.RapMentor.Contract.Interfaces;
 using JPMC.Hackathon.RapMentor.Contract.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace JPMC.Hackathon.RapMentor.Services.Services
 {

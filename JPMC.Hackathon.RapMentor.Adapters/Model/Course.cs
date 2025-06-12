@@ -1,4 +1,5 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
+using System;
 
 namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb.Model
 {

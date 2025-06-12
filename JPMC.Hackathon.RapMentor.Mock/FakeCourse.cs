@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using JPMC.Hackathon.RapMentor.Contract.Models;
+using System;
 
 namespace JPMC.Hackathon.RapMentor.Mock
 {
