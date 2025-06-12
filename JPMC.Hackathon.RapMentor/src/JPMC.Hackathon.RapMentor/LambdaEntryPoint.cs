@@ -9,7 +9,8 @@ namespace JPMC.Hackathon.RapMentor
     /// 
     /// JPMC.Hackathon.RapMentor::JPMC.Hackathon.RapMentor.LambdaEntryPoint::FunctionHandlerAsync
     /// </summary>
-    public class LambdaEntryPoint :
+    public class LambdaEntryPoint : APIGatewayProxyFunction
+    {
 
         // The base class must be set to match the AWS service invoking the Lambda function. If not Amazon.Lambda.AspNetCoreServer
         // will fail to convert the incoming request correctly into a valid ASP.NET Core request.
@@ -21,7 +22,6 @@ namespace JPMC.Hackathon.RapMentor
         // 
         // Note: When using the AWS::Serverless::Function resource with an event type of "HttpApi" then payload version 2.0
         // will be the default and you must make Amazon.Lambda.AspNetCoreServer.APIGatewayHttpApiV2ProxyFunction the base class.
-
         Amazon.Lambda.AspNetCoreServer.APIGatewayProxyFunction
     {
         protected override void Init(IWebHostBuilder builder)
