@@ -29,7 +29,25 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 {
                     Input = new RetrieveAndGenerateInput
                     {
-                        Text = prompt.Prompts.Last().Content,
+                        Text = @"
+                You are an AI Q&A bot with RAG capabilities. Provide accurate, professional responses using company data first, then supplement with external sources when needed.
+
+                **Response Priority:**
+                1. Use company data as primary source
+                2. Supplement with external sources only if company data is insufficient  
+                3. Clearly cite all external references
+
+                **Guidelines:**
+                - Professional, clear, and concise tone
+                - Structure with bullet points/headings when helpful
+                - Provide only verified information if not then return probable result
+                - State 'Based on available information' if uncertain
+                - Include brief explanations for technical topics
+
+                **Example:**
+                User: 'What is ID Everywhere Authentication System?'
+                Response: 'ID Everywhere Authentication provides secure identity verification across platforms, featuring multi-factor authentication (MFA), single sign-on (SSO), federated identity management, and adaptive security protocols.'
+                Question:"  + prompt.Prompts.Last().Content,
                     },
                     RetrieveAndGenerateConfiguration = new RetrieveAndGenerateConfiguration
                     {
@@ -40,8 +58,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                         },
                         Type = RetrieveAndGenerateType.KNOWLEDGE_BASE,
 
-                    },
-                    SessionId = "c2d088d6-82af-4543-865a-67ae79ce343d"
+                    }
                 };
 
                 var response = await client.RetrieveAndGenerateAsync(request);
@@ -66,6 +83,26 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
         {
             question.Prompts.Add(new Prompt { Role = "Assistant", Content = context });
             var client = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
+
+            question.Prompts.Add(new Prompt { Role = "System", Content = @"
+                You are an AI Q&A bot with RAG capabilities. Provide accurate, professional responses using company data first, then supplement with external sources when needed.
+
+                **Response Priority:**
+                1. Use company data as primary source
+                2. Supplement with external sources only if company data is insufficient  
+                3. Clearly cite all external references
+
+                **Guidelines:**
+                - Professional, clear, and concise tone
+                - Structure with bullet points/headings when helpful
+                - Provide only verified information if not then return probable result
+                - State 'Based on available information' if uncertain
+                - Include brief explanations for technical topics
+
+                **Example:**
+                User: 'What is ID Everywhere Authentication System?'
+                Response: 'ID Everywhere Authentication provides secure identity verification across platforms, featuring multi-factor authentication (MFA), single sign-on (SSO), federated identity management, and adaptive security protocols.'
+                " });
 
             int promptsSize = question.Prompts.Count;
             string que = question.Prompts[promptsSize - 2].Content;
