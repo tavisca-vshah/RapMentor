@@ -3,17 +3,17 @@ using Amazon.BedrockAgentRuntime;
 using Amazon.BedrockAgentRuntime.Model;
 using Amazon.BedrockRuntime;
 using Amazon.BedrockRuntime.Model;
-using System.Runtime.CompilerServices;
+using JPMC.Hackathon.RapMentor.Contract.Models;
 using System.Text.Json;
-using System.Text;
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 
 namespace JPMC.Hackathon.RapMentor.Services.Adapters
 {
     public class BedrockKBAdapter
     {
         static string modelArn = "anthropic.claude-3-sonnet-20240229-v1:0";
-        public static async Task<string> GetAsync(string queryText)
+        public static async Task<string> GetRagQnAAsync(QnAPrompt prompt)
         {
             
             string knowledgeBaseId = "R9FO1ASDHC";
@@ -26,7 +26,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 {
                     Input = new RetrieveAndGenerateInput
                     {
-                        Text = queryText,
+                        Text = prompt.Prompts.Last().Content,
                     },
                     RetrieveAndGenerateConfiguration = new RetrieveAndGenerateConfiguration
                     {
@@ -43,7 +43,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
 
                 var response = await client.RetrieveAndGenerateAsync(request);
 
-                return await GenerateMessageAsync(response.Output.Text, queryText);
+                return await GenerateMessageAsync(response.Output.Text, prompt);
             }
             catch (AmazonBedrockAgentRuntimeException ex)
             {
@@ -59,14 +59,15 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
         }
 
       
-        private static async Task<string> GenerateMessageAsync(string context, string question)
+        private static async Task<string> GenerateMessageAsync(string context, QnAPrompt question)
         {
-
+            question.Prompts.Add(new Prompt { Role = "Assistant", Content = context });
             var client = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
 
-
+            int promptsSize = question.Prompts.Count;
+            string que = question.Prompts[promptsSize - 2].Content;
             // Define the user message.
-            var userMessage = $"Use the context below if relevant. Context:\n\"\"\"\n{context}\n\"\"\"\n\nQuestion: {question}";
+            var userMessage = $"Use the context below if relevant. Context:\n\"\"\"\n{JsonSerializer.Serialize(question)}\n\"\"\"\n\n Question: {que}";
 
             //Format the request payload using the model's native structure.
             var nativeRequest = JsonSerializer.Serialize(new

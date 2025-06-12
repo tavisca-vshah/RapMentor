@@ -4,6 +4,6 @@ namespace JPMC.Hackathon.RapMentor.Contract.Interfaces
 {
     public interface IQnAService
     {
-        Task<string> GetAsync(string input);
+        Task<string> GetRagQnAAsync(QnAPrompt input);
     }
 }

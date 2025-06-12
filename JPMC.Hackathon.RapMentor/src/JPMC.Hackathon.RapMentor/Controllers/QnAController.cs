@@ -26,9 +26,9 @@ namespace JPMC.Hackathon.RapMentor.Controllers
 
         // POST api/<QnAController>
         [HttpPost]
-        public async Task<string> Post([FromBody] string value)
+        public async Task<string> Post([FromBody] QnAPrompt prompt)
         {
-            return await _qnAService.GetAsync(value);
+            return await _qnAService.GetRagQnAAsync(prompt);
         }
 
     }
