@@ -16,7 +16,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
     public class BedrockKBAdapter
     {
         static string modelArn = "anthropic.claude-3-sonnet-20240229-v1:0";
-        public static async Task<string> GetRagQnAAsync(QnAPrompt prompt)
+        public static async Task<string> GetRagQnAAsync(string prompt)
         {
 
             string knowledgeBaseId = "R9FO1ASDHC";
@@ -47,7 +47,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 **Example:**
                 User: 'What is ID Everywhere Authentication System?'
                 Response: 'ID Everywhere Authentication provides secure identity verification across platforms, featuring multi-factor authentication (MFA), single sign-on (SSO), federated identity management, and adaptive security protocols.'
-                Question:"  + prompt.Prompts.Last().Content,
+                Question:"  + prompt,
                     },
                     RetrieveAndGenerateConfiguration = new RetrieveAndGenerateConfiguration
                     {
@@ -63,7 +63,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
 
                 var response = await client.RetrieveAndGenerateAsync(request);
 
-                return await GenerateMessageAsync(response.Output.Text, prompt);
+                return response.Output.Text;
             }
             catch (AmazonBedrockAgentRuntimeException ex)
             {
@@ -79,7 +79,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
         }
 
 
-        private static async Task<string> GenerateMessageAsync(string context, QnAPrompt question)
+        public static async Task<string> GenerateMessageAsync(string context, QnAPrompt question)
         {
             question.Prompts.Add(new Prompt { Role = "Assistant", Content = context });
             var client = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);

@@ -61,5 +61,11 @@ namespace JPMC.Hackathon.RapMentor.Controllers
         public void Delete(int id)
         {
         }
+
+        // POST api/<CourseController>
+        [HttpPost("headings")]
+        public void Headings([FromBody] string value)
+        {
+        }
     }
 }
