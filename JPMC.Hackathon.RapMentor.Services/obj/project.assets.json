@@ -12,6 +12,18 @@
           "bin/placeholder/JPMC.Hackathon.RapMentor.Contract.dll": {}
         }
       }
+    },
+    "net8.0/linux-x64": {
+      "JPMC.Hackathon.RapMentor.Contract/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/JPMC.Hackathon.RapMentor.Contract.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/JPMC.Hackathon.RapMentor.Contract.dll": {}
+        }
+      }
     }
   },
   "libraries": {
@@ -96,6 +108,11 @@
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "linux-x64": {
+        "#import": []
       }
     }
   }

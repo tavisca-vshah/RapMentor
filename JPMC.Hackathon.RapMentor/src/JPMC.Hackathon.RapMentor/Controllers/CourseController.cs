@@ -1,12 +1,15 @@
 ﻿using JPMC.Hackathon.RapMentor.Contract.Interfaces;
 using JPMC.Hackathon.RapMentor.Contract.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace JPMC.Hackathon.RapMentor.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/courses")]
     [ApiController]
     public class CourseController : ControllerBase
     {
@@ -18,9 +21,18 @@ namespace JPMC.Hackathon.RapMentor.Controllers
         }
         // GET: api/<CourseController>
         [HttpGet]
-        public async Task<IActionResult> GetAllSync()
+        public async Task<IActionResult> GetCourses([FromQuery] string? authorId, [FromQuery] bool? isPublished)
         {
             var courses = await _courseService.GetAllAsync();
+            if (!string.IsNullOrWhiteSpace(authorId))
+            {
+                courses = courses.Where(x => x.AuthorId.Equals(authorId, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            if (isPublished.HasValue && isPublished.Value)
+            {
+                courses = courses.Where(x => x.CourseStatus == CourseStatus.Published.ToString()).ToList();
+            }
+
             return Ok(courses);
         }
 

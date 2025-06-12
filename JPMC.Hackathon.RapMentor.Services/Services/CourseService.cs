@@ -5,7 +5,8 @@ using System.Text.Json;
 using System.Text;
 using Amazon.Lambda;
 using Amazon.Lambda.Model;
-
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace JPMC.Hackathon.RapMentor.Services.Services
 {

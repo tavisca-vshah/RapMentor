@@ -1,4 +1,7 @@
-﻿namespace JPMC.Hackathon.RapMentor
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
+namespace JPMC.Hackathon.RapMentor
 {
     /// <summary>
     /// The Main function can be used to run the ASP.NET Core application locally using the Kestrel webserver.

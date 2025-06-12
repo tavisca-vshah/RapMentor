@@ -9,8 +9,9 @@
       "JPMC.Hackathon.RapMentor/1.0.0": {
         "dependencies": {
           "Amazon.Lambda.AspNetCoreServer": "9.0.0",
-          "JPMC.Hackathon.RapMentor.Adapters": "1.0.0",
+          "JPMC.Hackathon.RapMentor.Adapter.Dynamodb": "1.0.0",
           "JPMC.Hackathon.RapMentor.Contract": "1.0.0",
+          "JPMC.Hackathon.RapMentor.Mock": "1.0.0",
           "JPMC.Hackathon.RapMentor.Services": "1.0.0"
         },
         "runtime": {
@@ -81,6 +82,33 @@
           }
         }
       },
+      "AWSSDK.Core/4.0.0.9": {
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.9"
+          }
+        }
+      },
+      "AWSSDK.DynamoDBv2/4.0.1.5": {
+        "dependencies": {
+          "AWSSDK.Core": "4.0.0.9"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.DynamoDBv2.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.1.5"
+          }
+        }
+      },
+      "Bogus/35.6.3": {
+        "runtime": {
+          "lib/net6.0/Bogus.dll": {
+            "assemblyVersion": "35.6.3.0",
+            "fileVersion": "35.6.3.0"
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/2.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "2.1.0"
@@ -120,12 +148,13 @@
       },
       "System.Memory/4.5.0": {},
       "System.Runtime.CompilerServices.Unsafe/4.5.0": {},
-      "JPMC.Hackathon.RapMentor.Adapters/1.0.0": {
+      "JPMC.Hackathon.RapMentor.Adapter.Dynamodb/1.0.0": {
         "dependencies": {
+          "AWSSDK.DynamoDBv2": "4.0.1.5",
           "JPMC.Hackathon.RapMentor.Contract": "1.0.0"
         },
         "runtime": {
-          "JPMC.Hackathon.RapMentor.Adapters.dll": {
+          "JPMC.Hackathon.RapMentor.Adapter.Dynamodb.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -134,6 +163,18 @@
       "JPMC.Hackathon.RapMentor.Contract/1.0.0": {
         "runtime": {
           "JPMC.Hackathon.RapMentor.Contract.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "JPMC.Hackathon.RapMentor.Mock/1.0.0": {
+        "dependencies": {
+          "Bogus": "35.6.3",
+          "JPMC.Hackathon.RapMentor.Contract": "1.0.0"
+        },
+        "runtime": {
+          "JPMC.Hackathon.RapMentor.Mock.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -199,6 +240,27 @@
       "sha512": "sha512-X06Z8zPDZJS/xAoAntSqsxOoSSKKFJMg+0QGPRtlPt1mbP19HFXlXn+q+XqHdVWWFsiH/r7KbDIICr0nsrlwug==",
       "path": "amazon.lambda.serialization.systemtextjson/2.4.1",
       "hashPath": "amazon.lambda.serialization.systemtextjson.2.4.1.nupkg.sha512"
+    },
+    "AWSSDK.Core/4.0.0.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VYONeeod2wDj/UK+nWpvVKTMjgkpcDvayXnSmLHtpYDT0OMxNmcLCAGJNkFyUswgwsvIQRI3TRXyF5jkwkDuYQ==",
+      "path": "awssdk.core/4.0.0.9",
+      "hashPath": "awssdk.core.4.0.0.9.nupkg.sha512"
+    },
+    "AWSSDK.DynamoDBv2/4.0.1.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dEB4cpExECcw+Gx8RJaVQXxvyHvZflcu2w3W8K507ofYWjOiPf6F6ibESDgjZf4CuqcCP9tdgp5uzusm1PHm/Q==",
+      "path": "awssdk.dynamodbv2/4.0.1.5",
+      "hashPath": "awssdk.dynamodbv2.4.0.1.5.nupkg.sha512"
+    },
+    "Bogus/35.6.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+5omfZWy8gOcbpc48vKfMI4h/ecbdf3NQm6xCl3zMbaP4J3rMMm5h3kPFeIWBgt4mbz6YY0eeZDLR/6yv1khKw==",
+      "path": "bogus/35.6.3",
+      "hashPath": "bogus.35.6.3.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/2.1.0": {
       "type": "package",
@@ -270,12 +332,17 @@
       "path": "system.runtime.compilerservices.unsafe/4.5.0",
       "hashPath": "system.runtime.compilerservices.unsafe.4.5.0.nupkg.sha512"
     },
-    "JPMC.Hackathon.RapMentor.Adapters/1.0.0": {
+    "JPMC.Hackathon.RapMentor.Adapter.Dynamodb/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "JPMC.Hackathon.RapMentor.Contract/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "JPMC.Hackathon.RapMentor.Mock/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

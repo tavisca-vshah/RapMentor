@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+
 namespace JPMC.Hackathon.RapMentor
 {
     /// <summary>
@@ -6,7 +9,8 @@ namespace JPMC.Hackathon.RapMentor
     /// 
     /// JPMC.Hackathon.RapMentor::JPMC.Hackathon.RapMentor.LambdaEntryPoint::FunctionHandlerAsync
     /// </summary>
-    public class LambdaEntryPoint :
+    public class LambdaEntryPoint : APIGatewayProxyFunction
+    {
 
         // The base class must be set to match the AWS service invoking the Lambda function. If not Amazon.Lambda.AspNetCoreServer
         // will fail to convert the incoming request correctly into a valid ASP.NET Core request.
@@ -18,29 +22,13 @@ namespace JPMC.Hackathon.RapMentor
         // 
         // Note: When using the AWS::Serverless::Function resource with an event type of "HttpApi" then payload version 2.0
         // will be the default and you must make Amazon.Lambda.AspNetCoreServer.APIGatewayHttpApiV2ProxyFunction the base class.
-
         Amazon.Lambda.AspNetCoreServer.APIGatewayProxyFunction
     {
-        /// <summary>
-        /// The builder has configuration, logging and Amazon API Gateway already configured. The startup class
-        /// needs to be configured in this method using the UseStartup<>() method.
-        /// </summary>
-        /// <param name="builder">The IWebHostBuilder to configure.</param>
         protected override void Init(IWebHostBuilder builder)
         {
-            builder
-                .UseStartup<Startup>();
-        }
-
-        /// <summary>
-        /// Use this override to customize the services registered with the IHostBuilder. 
-        /// 
-        /// It is recommended not to call ConfigureWebHostDefaults to configure the IWebHostBuilder inside this method.
-        /// Instead customize the IWebHostBuilder in the Init(IWebHostBuilder) overload.
-        /// </summary>
-        /// <param name="builder">The IHostBuilder to configure.</param>
-        protected override void Init(IHostBuilder builder)
-        {
+            builder.UseContentRoot(Directory.GetCurrentDirectory())
+                   .UseStartup<Startup>()
+                   .UseLambdaServer();
         }
     }
 }
