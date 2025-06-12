@@ -58,5 +58,10 @@ namespace JPMC.Hackathon.RapMentor.Mock
                 return _courseList;
             }
         }
+
+        public Task<Course> UpdateCourseAsync(Course course)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
