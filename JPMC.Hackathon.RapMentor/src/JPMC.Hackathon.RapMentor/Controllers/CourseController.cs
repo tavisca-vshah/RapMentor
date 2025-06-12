@@ -17,9 +17,10 @@ namespace JPMC.Hackathon.RapMentor.Controllers
         }
         // GET: api/<CourseController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAllSync()
         {
-            return new string[] { "value1", "value2" };
+            var courses = await _courseService.GetAllAsync();
+            return Ok(courses);
         }
 
         // GET api/<CourseController>/5

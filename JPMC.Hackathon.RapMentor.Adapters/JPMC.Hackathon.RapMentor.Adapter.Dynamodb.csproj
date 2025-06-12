@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="4.0.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\JPMC.Hackathon.RapMentor.Contract\JPMC.Hackathon.RapMentor.Contract.csproj" />
   </ItemGroup>
 

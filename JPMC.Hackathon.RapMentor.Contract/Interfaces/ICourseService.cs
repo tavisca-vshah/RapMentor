@@ -5,6 +5,7 @@ namespace JPMC.Hackathon.RapMentor.Contract.Interfaces
 {
     public interface ICourseService
     {
-        Task<CourseDetail> GetAsync(string id);
+        Task<Course> GetAsync(string id);
+        Task<List<Course>> GetAllAsync();
     }
 }

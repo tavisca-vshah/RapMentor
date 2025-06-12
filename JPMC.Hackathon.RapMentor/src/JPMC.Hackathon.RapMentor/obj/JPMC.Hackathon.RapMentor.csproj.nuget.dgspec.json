@@ -4,12 +4,12 @@
     "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor\\src\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.csproj": {}
   },
   "projects": {
-    "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapters.csproj": {
+    "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapter.Dynamodb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapters.csproj",
-        "projectName": "JPMC.Hackathon.RapMentor.Adapters",
-        "projectPath": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapters.csproj",
+        "projectUniqueName": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapter.Dynamodb.csproj",
+        "projectName": "JPMC.Hackathon.RapMentor.Adapter.Dynamodb",
+        "projectPath": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapter.Dynamodb.csproj",
         "packagesPath": "C:\\Users\\N747459\\.nuget\\packages\\",
         "outputPath": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\obj\\",
         "projectStyle": "PackageReference",
@@ -235,8 +235,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapters.csproj": {
-                "projectPath": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapters.csproj"
+              "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapter.Dynamodb.csproj": {
+                "projectPath": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Adapters\\JPMC.Hackathon.RapMentor.Adapter.Dynamodb.csproj"
               },
               "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Contract\\JPMC.Hackathon.RapMentor.Contract.csproj": {
                 "projectPath": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Contract\\JPMC.Hackathon.RapMentor.Contract.csproj"
