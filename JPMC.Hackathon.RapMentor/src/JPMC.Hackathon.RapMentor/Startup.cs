@@ -17,6 +17,7 @@ namespace JPMC.Hackathon.RapMentor
         {
             services.AddControllers();
             services.AddSingleton<ICourseService, CourseService>();
+            services.AddSingleton<IQnAService, QnAService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
