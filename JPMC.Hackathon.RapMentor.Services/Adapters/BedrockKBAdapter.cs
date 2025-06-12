@@ -142,7 +142,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                     You are a course architect and learning experience designer. Your task is to generate a comma-separated list of high-level topic headings for a course based on the provided context.
  
                     Design the course using the following structure:
-                    1. Course Overview
+                    1. CourseName/ProductName Overview[only if we can write content about that product]
                     2. Technologies Used
                     3. Services or Tools Used
                     4. System Architecture
