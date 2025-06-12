@@ -359,3 +359,4 @@ MigrationBackup/
 /.vs/JPMC.Hackathon.RapMentor/v17/DocumentLayout.json
 bin/*
 obj/*
+/JPMC.Hackathon.RapMentor/src/JPMC.Hackathon.RapMentor/obj/Debug/net8.0/ApiEndpoints.json
