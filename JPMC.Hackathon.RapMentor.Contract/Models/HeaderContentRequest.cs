@@ -2,6 +2,6 @@
 {
     public class HeaderContentRequest : CourseHeadersRequest
     {
-        public string header {  get; set; }
+        public string Header {  get; set; }
     }
 }
