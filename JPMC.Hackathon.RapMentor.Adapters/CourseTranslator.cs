@@ -8,12 +8,12 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
         {
             return new Contract.Models.Course
             {
-                AuthorId = course.AuthorId,
                 Category = course.Category,
                 Description = course.Description,
                 Id = course.Id,
-                IsPublished = course.IsPublished,
+                AuthorId = course.AuthorId,
                 Title = course.Title,
+                CourseStatus = course.CourseStatus,
             };
         }
 
@@ -21,12 +21,12 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
         {
             return new Course
             {
-                AuthorId = course.AuthorId,
                 Category = course.Category,
                 Description = course.Description,
                 Id = course.Id,
-                IsPublished = course.IsPublished,
+                AuthorId = course.AuthorId,
                 Title = course.Title,
+                CourseStatus = course.CourseStatus,
             };
         }
     }

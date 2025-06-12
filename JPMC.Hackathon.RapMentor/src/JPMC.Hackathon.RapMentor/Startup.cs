@@ -1,4 +1,6 @@
-﻿using JPMC.Hackathon.RapMentor.Contract.Interfaces;
+﻿using JPMC.Hackathon.RapMentor.Adapter.Dynamodb;
+using JPMC.Hackathon.RapMentor.Contract.Interfaces;
+using JPMC.Hackathon.RapMentor.Mock;
 using JPMC.Hackathon.RapMentor.Services.Services;
 
 namespace JPMC.Hackathon.RapMentor
@@ -17,6 +19,7 @@ namespace JPMC.Hackathon.RapMentor
         {
             services.AddControllers();
             services.AddSingleton<ICourseService, CourseService>();
+            services.AddSingleton<ICourseRepository, MockCourseRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

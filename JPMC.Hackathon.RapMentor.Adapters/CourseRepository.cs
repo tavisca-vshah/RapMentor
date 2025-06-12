@@ -1,6 +1,6 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
-using JPMC.Hackathon.RapMentor.Adapter.Dynamodb.Model;
+using JPMC.Hackathon.RapMentor.Contract.Models;
 
 namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
 {
@@ -22,18 +22,23 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
 
         public async Task PublishCourseAsync(string id)
         {
-            var course = await _context.LoadAsync<Course>(id);
+            var course = await _context.LoadAsync<Adapter.Dynamodb.Model.Course>(id);
             if (course != null)
             {
-                course.IsPublished = true;
+                course.CourseStatus = CourseStatus.Published.ToString();
                 await _context.SaveAsync(course);
             }
         }
 
-        public async Task<Contract.Models.Course?> GetCourseAsync(string id)
+        public async Task<Contract.Models.Course?> GetAsync(string id)
         {
-            var courseDbObject = await _context.LoadAsync<Course>(id);
+            var courseDbObject = await _context.LoadAsync<Adapter.Dynamodb.Model.Course>(id);
             return courseDbObject.ToCourseModel();
+        }
+
+        public Task<List<Contract.Models.Course>> GetAllAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

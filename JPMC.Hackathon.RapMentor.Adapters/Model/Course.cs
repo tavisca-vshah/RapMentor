@@ -11,8 +11,8 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb.Model
         public string Title { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
+        public string CourseStatus { get; set; }
         public string AuthorId { get; set; }
-        public bool IsPublished { get; set; }
     }
 
 }

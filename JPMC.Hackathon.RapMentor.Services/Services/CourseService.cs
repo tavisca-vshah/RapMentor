@@ -1,18 +1,25 @@
-﻿using JPMC.Hackathon.RapMentor.Contract.Interfaces;
+﻿using JPMC.Hackathon.RapMentor.Adapter.Dynamodb;
+using JPMC.Hackathon.RapMentor.Contract.Interfaces;
 using JPMC.Hackathon.RapMentor.Contract.Models;
 
 namespace JPMC.Hackathon.RapMentor.Services.Services
 {
     public class CourseService : ICourseService
     {
-        public Task<List<Course>> GetAllAsync()
+        private readonly ICourseRepository _courseRepository;
+
+        public CourseService(ICourseRepository courseRepository)
         {
-            throw new NotImplementedException();
+            this._courseRepository = courseRepository;
+        }
+        public async Task<List<Course>> GetAllAsync()
+        {
+            return await _courseRepository.GetAllAsync();
         }
 
         public async Task<Course> GetAsync(string id)
         {
-
+            return await _courseRepository.GetAsync(id);
         }
     }
 }

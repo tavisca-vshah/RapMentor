@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\JPMC.Hackathon.RapMentor.Adapters\JPMC.Hackathon.RapMentor.Adapter.Dynamodb.csproj" />
     <ProjectReference Include="..\..\..\JPMC.Hackathon.RapMentor.Contract\JPMC.Hackathon.RapMentor.Contract.csproj" />
+    <ProjectReference Include="..\..\..\JPMC.Hackathon.RapMentor.Mock\JPMC.Hackathon.RapMentor.Mock.csproj" />
     <ProjectReference Include="..\..\..\JPMC.Hackathon.RapMentor.Services\JPMC.Hackathon.RapMentor.Services.csproj" />
   </ItemGroup>
 </Project>
