@@ -4,7 +4,7 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
 {
     internal static class CourseTranslator
     {
-        internal static Contract.Models.Course? ToCourseModel(this Course course)
+        internal static Contract.Models.Course? ToCourseModel(this CourseDataobject course)
         {
             return new Contract.Models.Course
             {
@@ -17,9 +17,9 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
             };
         }
 
-        internal static Course? ToCourseDBObject(this Contract.Models.Course course)
+        internal static CourseDataobject? ToCourseDBObject(this Contract.Models.Course course)
         {
-            return new Course
+            return new CourseDataobject
             {
                 Category = course.Category,
                 Description = course.Description,
