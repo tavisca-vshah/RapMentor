@@ -4,9 +4,12 @@ using Amazon.BedrockAgentRuntime.Model;
 using Amazon.BedrockRuntime;
 using Amazon.BedrockRuntime.Model;
 using JPMC.Hackathon.RapMentor.Contract.Models;
+using System;
+using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace JPMC.Hackathon.RapMentor.Services.Adapters
 {
@@ -15,11 +18,11 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
         static string modelArn = "anthropic.claude-3-sonnet-20240229-v1:0";
         public static async Task<string> GetRagQnAAsync(QnAPrompt prompt)
         {
-            
+
             string knowledgeBaseId = "R9FO1ASDHC";
 
             var client = new AmazonBedrockAgentRuntimeClient(RegionEndpoint.USEast1);
-            
+
             try
             {
                 var request = new RetrieveAndGenerateRequest
@@ -36,7 +39,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                             ModelArn = modelArn
                         },
                         Type = RetrieveAndGenerateType.KNOWLEDGE_BASE,
-                       
+
                     },
                     SessionId = "c2d088d6-82af-4543-865a-67ae79ce343d"
                 };
@@ -58,7 +61,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
             return "";
         }
 
-      
+
         private static async Task<string> GenerateMessageAsync(string context, QnAPrompt question)
         {
             question.Prompts.Add(new Prompt { Role = "Assistant", Content = context });
@@ -71,15 +74,15 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
 
             //Format the request payload using the model's native structure.
             var nativeRequest = JsonSerializer.Serialize(new
-                {
-                    anthropic_version = "bedrock-2023-05-31",
-                    max_tokens = 512,
-                    temperature = 0.5,
-                    messages = new[]
+            {
+                anthropic_version = "bedrock-2023-05-31",
+                max_tokens = 512,
+                temperature = 0.5,
+                messages = new[]
                     {
                             new { role = "user", content = userMessage }
                     }
-                });
+            });
 
             // Create a request with the model ID and the model's native request payload.
             var request = new InvokeModelRequest()

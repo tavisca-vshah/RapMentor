@@ -1,4 +1,6 @@
-﻿namespace JPMC.Hackathon.RapMentor.Contract.Models
+﻿using System.Collections.Generic;
+
+namespace JPMC.Hackathon.RapMentor.Contract.Models
 {
     public class QnAPrompt
     {
