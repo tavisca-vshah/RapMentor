@@ -7,5 +7,9 @@ namespace JPMC.Hackathon.RapMentor.Contract.Interfaces
     {
         Task<Course> GetAsync(string id);
         Task<List<Course>> GetAllAsync();
+        Task<Course> CreateCourseAsync(CreateCourseRequest request);
+        Task<Course> UpdateCourseAsync(string courseId, Course updatedCourse);
+        Task<Course> PublishCourseAsync(string courseId);
+
     }
 }

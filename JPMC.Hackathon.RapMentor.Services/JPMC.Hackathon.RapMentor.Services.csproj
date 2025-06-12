@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.Core" Version="2.2.0" />
+    <PackageReference Include="AWSSDK.Lambda" Version="4.0.0.7" />
+    <PackageReference Include="AWSSDK.S3" Version="4.0.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\JPMC.Hackathon.RapMentor.Contract\JPMC.Hackathon.RapMentor.Contract.csproj" />
   </ItemGroup>
 

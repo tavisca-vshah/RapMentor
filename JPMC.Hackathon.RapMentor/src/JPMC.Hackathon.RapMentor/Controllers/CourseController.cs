@@ -1,4 +1,5 @@
 ﻿using JPMC.Hackathon.RapMentor.Contract.Interfaces;
+using JPMC.Hackathon.RapMentor.Contract.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -33,14 +34,25 @@ namespace JPMC.Hackathon.RapMentor.Controllers
 
         // POST api/<CourseController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> CreateCourseAsync([FromBody] CreateCourseRequest value)
         {
+            var courseDetial = await _courseService.CreateCourseAsync(value);
+            return Ok(courseDetial);
         }
 
         // PUT api/<CourseController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> UpdateCourseAsync(string id, [FromBody] Course value)
         {
+            var courseDetial = await _courseService.UpdateCourseAsync(id, value);
+            return Ok(courseDetial);
+        }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> PublishCourseAsync(string id)
+        {
+            var courseDetial = await _courseService.PublishCourseAsync(id);
+            return Ok(courseDetial);
         }
 
         // DELETE api/<CourseController>/5

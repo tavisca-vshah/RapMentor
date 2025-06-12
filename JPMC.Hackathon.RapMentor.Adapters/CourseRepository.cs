@@ -40,5 +40,12 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Contract.Models.Course> UpdateCourseAsync(Contract.Models.Course course)
+        {
+            var saveObject = course.ToCourseDBObject();
+            await _context.SaveAsync(saveObject);
+            return course;
+        }
     }
 }
