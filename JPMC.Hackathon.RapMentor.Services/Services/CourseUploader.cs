@@ -61,7 +61,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
             sb.AppendLine($"Id: {course.Id}");
             sb.AppendLine($"Title: {course.Title}");
             sb.AppendLine($"Description: {course.Description}");
-            sb.AppendLine($"Category: {course.Category}");
+            sb.AppendLine($"Category: {course.Level}");
             sb.AppendLine($"AuthorId: {course.AuthorId}");
             sb.AppendLine($"CourseStatus: {course.CourseStatus}");
             sb.AppendLine();

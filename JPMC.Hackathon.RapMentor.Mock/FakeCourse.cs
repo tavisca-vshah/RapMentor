@@ -19,7 +19,7 @@ namespace JPMC.Hackathon.RapMentor.Mock
                 .RuleFor(c => c.Id, _ => Guid.NewGuid().ToString())
                 .RuleFor(c => c.Title, f => f.Lorem.Sentence(2))
                 .RuleFor(c => c.Description, f => f.Lorem.Paragraph(2))
-                .RuleFor(c => c.Category, f => f.PickRandom<CourseCategory>().ToString())
+                .RuleFor(c => c.Level, f => f.PickRandom<CourseCategory>().ToString())
                 .RuleFor(x => x.Modules, _ => addressFaker.GenerateBetween(1, 10))
                 .RuleFor(c => c.CourseStatus, f => f.PickRandom<CourseStatus>().ToString())
                 .RuleFor(c => c.AuthorId, _ => Guid.NewGuid().ToString());

@@ -1,20 +1,18 @@
-﻿using Amazon.Lambda;
-using Amazon.Lambda.Model;
-using JPMC.Hackathon.RapMentor.Adapter.Dynamodb;
+﻿using JPMC.Hackathon.RapMentor.Adapter.Dynamodb;
 using JPMC.Hackathon.RapMentor.Contract.Interfaces;
 using JPMC.Hackathon.RapMentor.Contract.Models;
 using JPMC.Hackathon.RapMentor.Services.Adapters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace JPMC.Hackathon.RapMentor.Services.Services
 {
     public class CourseService : ICourseService
     {
+        private string _baseUrl = "https://0jjmybfxv1.execute-api.us-east-1.amazonaws.com/Prod";
         private readonly ICourseRepository _courseRepository;
         private readonly IAmazonLambda _lambda;
 
@@ -41,62 +39,60 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
         public async Task<Course> FormulateCourseAsync(CreateCourseRequest request)
         {
             // 1. Call Lambda 1 to get modules list
-            var modulesPayload = JsonSerializer.Serialize(new
-            {
-                userPrompt = request.CoursePrompt,
-                level = request.Level,
-                additionalModules = request.AdditionalModules
-            });
 
-            var listModulesResponse = await _lambda.InvokeAsync(new InvokeRequest
-            {
-                FunctionName = "list-modules-lambda", // Replace with your Lambda name or ARN
-                Payload = modulesPayload
-            });
+            var httpClient = new HttpClient();
+            var headingsTask = httpClient.PostAsJsonAsync($"{_baseUrl}/api/courses/headings", request);
+            var descriptionTask = httpClient.PostAsJsonAsync($"{_baseUrl}/api/courses/description", request);
 
-            var modulesJson = Encoding.UTF8.GetString(listModulesResponse.Payload.ToArray());
-            var moduleNames = JsonSerializer.Deserialize<List<string>>(modulesJson);
+            await Task.WhenAll(headingsTask, descriptionTask);
 
-            if (moduleNames == null || moduleNames.Count == 0)
+            var headingsResponse = await headingsTask;
+            var descriptionResponse = await descriptionTask;
+
+
+            if (headingsResponse.IsSuccessStatusCode && descriptionResponse.IsSuccessStatusCode)
             {
-                throw new Exception("No modules returned from module listing Lambda.");
+                var headings = await headingsResponse.Content.ReadFromJsonAsync<List<string>>();
+                var description = await descriptionResponse.Content.ReadAsStringAsync();
+
+
+                var contentTasks = new List<Task<(string Header, string Content)>>();
+
+                foreach (var heading in headings)
+                {
+                    var requestWithHeader = new
+                    {
+                        AuthorId = request.AuthorId,
+                        CoursePrompt = request.CoursePrompt,
+                        Level = request.Level,
+                        Duration = request.Duration,
+                        Skills = request.Skills,
+                        AdditionalModules = request.AdditionalModules,
+                        Header = heading
+                    };
+
+
+                    var task = FetchContentAsync(httpClient, requestWithHeader);
+                    contentTasks.Add(task);
+                }
+
+                var results = await Task.WhenAll(contentTasks);
+
             }
-
-            // 2. Call Lambda 2 in parallel to generate content for each module
-            var contentTasks = moduleNames.Select(async moduleName =>
-            {
-                var contentPayload = JsonSerializer.Serialize(new
-                {
-                    moduleName = moduleName,
-                    userPrompt = request.CoursePrompt,
-                    level = request.Level,
-                    duration = request.Duration,
-                    skills = request.Skills
-                });
-
-                var contentResponse = await _lambda.InvokeAsync(new InvokeRequest
-                {
-                    FunctionName = "generate-module-content-lambda", // Replace with your Lambda name or ARN
-                    Payload = contentPayload
-                });
-
-                var contentJson = Encoding.UTF8.GetString(contentResponse.Payload.ToArray());
-                return JsonSerializer.Deserialize<Module>(contentJson);
-            });
-
-            var moduleContents = await Task.WhenAll(contentTasks);
-
-            // 3. Combine results into a course
-            var course = new Course
-            {
-                Title = request.CoursePrompt,
-                Modules = moduleContents.ToList(),
-                AuthorId = request.AuthorId,
-                CourseStatus = CourseStatus.Draft.ToString() // default to draft on creation
-            };
-
-            return course;
+            return null;
         }
+
+        private static async Task<(string Header, string Content)> FetchContentAsync(HttpClient client, CreateCourseRequest request)
+        {
+            var response = await client.PostAsJsonAsync($"{_baseUrl}/api/courses/headings/Content", request);
+            var content = response.IsSuccessStatusCode
+            ? await response.Content.ReadAsStringAsync()
+            : $"Error: {response.StatusCode}";
+            return (request.Header, content);
+        }
+}
+
+            
 
         public async Task<Course> UpdateCourseAsync(string courseId, Course updatedCourse)
         {

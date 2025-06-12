@@ -8,7 +8,7 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
         {
             return new Contract.Models.Course
             {
-                Category = course.Category,
+                Level = course.Category,
                 Description = course.Description,
                 Id = course.Id,
                 AuthorId = course.AuthorId,
@@ -21,7 +21,7 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
         {
             return new CourseDataobject
             {
-                Category = course.Category,
+                Category = course.Level,
                 Description = course.Description,
                 Id = course.Id,
                 AuthorId = course.AuthorId,

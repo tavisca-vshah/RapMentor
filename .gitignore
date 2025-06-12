@@ -350,7 +350,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-.vs/*
+*/.vs/*
 *.bak
 /.vs/JPMC.Hackathon.RapMentor/v17/DocumentLayout.backup.json
 /.vs/JPMC.Hackathon.RapMentor/v17/DocumentLayout.json

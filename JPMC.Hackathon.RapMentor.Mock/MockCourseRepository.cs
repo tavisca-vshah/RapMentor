@@ -16,7 +16,7 @@ namespace JPMC.Hackathon.RapMentor.Mock
             var courseToSave = new Course
             {
                 Id = Guid.NewGuid().ToString(),
-                Category = course.Category,
+                Level = course.Level,
                 Description = course.Description,
                 Title = course.Title,
                 AuthorId = course.AuthorId,
