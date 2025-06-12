@@ -13,3 +13,4 @@ C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Servi
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Services\obj\Debug\net8.0\refint\JPMC.Hackathon.RapMentor.Services.dll
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Services\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Services.pdb
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Services\obj\Debug\net8.0\ref\JPMC.Hackathon.RapMentor.Services.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Services\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Services.sourcelink.json

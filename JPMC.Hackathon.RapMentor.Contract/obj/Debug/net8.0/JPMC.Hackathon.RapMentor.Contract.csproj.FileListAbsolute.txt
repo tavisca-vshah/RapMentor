@@ -9,3 +9,4 @@ C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Contr
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Contract\obj\Debug\net8.0\refint\JPMC.Hackathon.RapMentor.Contract.dll
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Contract\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Contract.pdb
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Contract\obj\Debug\net8.0\ref\JPMC.Hackathon.RapMentor.Contract.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Contract\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Contract.sourcelink.json

@@ -13,10 +13,8 @@ C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\J
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\Amazon.Lambda.Core.dll
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\Amazon.Lambda.Logging.AspNetCore.dll
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\Amazon.Lambda.Serialization.SystemTextJson.dll
-C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.dll
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Contract.dll
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Services.dll
-C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.pdb
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Contract.pdb
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Services.pdb
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.csproj.AssemblyReference.cache
@@ -42,3 +40,11 @@ C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\J
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.pdb
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.genruntimeconfig.cache
 C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\obj\Debug\net8.0\ref\JPMC.Hackathon.RapMentor.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\AWSSDK.Core.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\Bogus.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapter.Dynamodb.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Mock.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapter.Dynamodb.pdb
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Mock.pdb
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.sourcelink.json
