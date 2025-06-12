@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
@@ -204,6 +205,39 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 
                
                 Query: " + JsonSerializer.Serialize(courseHeadersRequest)
+            }
+            };
+
+            var nativeRequest = JsonSerializer.Serialize(new
+            {
+                anthropic_version = "bedrock-2023-05-31",
+                max_tokens = 512,
+                temperature = 0.5,
+                messages = messages
+            });
+
+            // Create a request with the model ID and the model's native request payload.
+            var request = new InvokeModelRequest()
+            {
+                ModelId = modelArn,
+                Body = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(nativeRequest)),
+                ContentType = "application/json"
+            };
+
+            return await InvokeModelAsync(request);
+        }
+
+        public static async Task<string> GetCourseSummerization(CourseHeadersRequest courseHeadersRequest)
+        {
+            var messages = new List<Prompt> { new Prompt
+            {
+                role = "user",
+                content = $@"
+                You are a professional course content writer. Based on the following input, generate a compelling and informative course description suitable for a course catalog or website. The description should be clear, engaging, and tailored to the target audience.
+ 
+                {JsonSerializer.Serialize(courseHeadersRequest)}
+ 
+                Write a paragraph that introduces the course, highlights the skills learners will gain, specifies the target audience based on the level, mentions the duration, and includes the value of the additional modules. Keep the tone professional and informative." 
             }
             };
 

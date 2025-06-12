@@ -11,5 +11,6 @@ namespace JPMC.Hackathon.RapMentor.Contract.Interfaces
         Task<List<Course>> GetAllAsync();
         Task<List<string>> GetCourseHeadings(CourseHeadersRequest request);
         Task<string> GetHeaderContent(HeaderContentRequest request);
+        Task<string> GetCourseSummerization(CourseHeadersRequest request);
     }
 }
