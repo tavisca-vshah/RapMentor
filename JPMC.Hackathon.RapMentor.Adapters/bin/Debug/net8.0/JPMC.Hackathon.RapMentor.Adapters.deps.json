@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "JPMC.Hackathon.RapMentor.Adapters/1.0.0": {
+        "dependencies": {
+          "JPMC.Hackathon.RapMentor.Contract": "1.0.0"
+        },
+        "runtime": {
+          "JPMC.Hackathon.RapMentor.Adapters.dll": {}
+        }
+      },
+      "JPMC.Hackathon.RapMentor.Contract/1.0.0": {
+        "runtime": {
+          "JPMC.Hackathon.RapMentor.Contract.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "JPMC.Hackathon.RapMentor.Adapters/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "JPMC.Hackathon.RapMentor.Contract/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

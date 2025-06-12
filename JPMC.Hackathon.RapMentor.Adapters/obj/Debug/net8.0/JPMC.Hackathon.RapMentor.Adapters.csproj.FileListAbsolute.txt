@@ -1,0 +1,15 @@
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.deps.json
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.pdb
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Contract.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\bin\Debug\net8.0\JPMC.Hackathon.RapMentor.Contract.pdb
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.csproj.AssemblyReference.cache
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.GeneratedMSBuildEditorConfig.editorconfig
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.AssemblyInfoInputs.cache
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.AssemblyInfo.cs
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.csproj.CoreCompileInputs.cache
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\obj\Debug\net8.0\JPMC.Hac.78AF0246.Up2Date
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\obj\Debug\net8.0\refint\JPMC.Hackathon.RapMentor.Adapters.dll
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\obj\Debug\net8.0\JPMC.Hackathon.RapMentor.Adapters.pdb
+C:\development\hackathon\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.Adapters\obj\Debug\net8.0\ref\JPMC.Hackathon.RapMentor.Adapters.dll

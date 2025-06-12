@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\JPMC.Hackathon.RapMentor.props" />
+</Project>

@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.36105.23 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPMC.Hackathon.RapMentor", "JPMC.Hackathon.RapMentor\src\JPMC.Hackathon.RapMentor\JPMC.Hackathon.RapMentor.csproj", "{68D529AA-E1D3-472D-A03C-F8CDDFF54AEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPMC.Hackathon.RapMentor.Services", "JPMC.Hackathon.RapMentor.Services\JPMC.Hackathon.RapMentor.Services.csproj", "{A031DA00-A8F2-4697-B4DC-9031E2ABDCA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPMC.Hackathon.RapMentor.Contract", "JPMC.Hackathon.RapMentor.Contract\JPMC.Hackathon.RapMentor.Contract.csproj", "{1C430A38-6289-4DAC-8BA3-E0CE42B5B4AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPMC.Hackathon.RapMentor.Adapters", "JPMC.Hackathon.RapMentor.Adapters\JPMC.Hackathon.RapMentor.Adapters.csproj", "{50F47E06-EA7A-4D44-BD02-39B21567B085}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68D529AA-E1D3-472D-A03C-F8CDDFF54AEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D529AA-E1D3-472D-A03C-F8CDDFF54AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D529AA-E1D3-472D-A03C-F8CDDFF54AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D529AA-E1D3-472D-A03C-F8CDDFF54AEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A031DA00-A8F2-4697-B4DC-9031E2ABDCA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A031DA00-A8F2-4697-B4DC-9031E2ABDCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A031DA00-A8F2-4697-B4DC-9031E2ABDCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A031DA00-A8F2-4697-B4DC-9031E2ABDCA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C430A38-6289-4DAC-8BA3-E0CE42B5B4AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C430A38-6289-4DAC-8BA3-E0CE42B5B4AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C430A38-6289-4DAC-8BA3-E0CE42B5B4AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C430A38-6289-4DAC-8BA3-E0CE42B5B4AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F47E06-EA7A-4D44-BD02-39B21567B085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F47E06-EA7A-4D44-BD02-39B21567B085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F47E06-EA7A-4D44-BD02-39B21567B085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F47E06-EA7A-4D44-BD02-39B21567B085}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73755F47-7144-4859-8262-FE78A09102FC}
+	EndGlobalSection
+EndGlobal
