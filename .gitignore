@@ -357,3 +357,5 @@ MigrationBackup/
 *.bak
 /.vs/JPMC.Hackathon.RapMentor/v17/DocumentLayout.backup.json
 /.vs/JPMC.Hackathon.RapMentor/v17/DocumentLayout.json
+bin/*
+obj/*
