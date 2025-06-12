@@ -2,6 +2,7 @@
 {
     public enum CourseStatus
     {
+        GeneratingDraft,
         Draft,
         Published
     }

@@ -21,7 +21,7 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb.Model
         public string AuthorId { get; set; }
     }
 
-    [DynamoDBTable("Modules")]
+    [DynamoDBTable("modules")]
     public class ModuleDataObject
     {
         [DynamoDBHashKey("course_id")]

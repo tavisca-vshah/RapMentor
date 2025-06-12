@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace JPMC.Hackathon.RapMentor.Contract.Models
+﻿namespace JPMC.Hackathon.RapMentor.Contract.Models
 {
     public class CreateCourseRequest
     {
@@ -9,7 +7,7 @@ namespace JPMC.Hackathon.RapMentor.Contract.Models
         public string CoursePrompt { get; set; }
         public string Level { get; set; }
         public string Duration { get; set; }
-        public List<string> Skills { get; set; }
-        public List<string> AdditionalModules { get; set; }
+        public string Skills { get; set; }
+        public string AdditionalModules { get; set; }
     }
 }

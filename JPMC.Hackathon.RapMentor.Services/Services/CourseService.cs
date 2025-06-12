@@ -2,7 +2,6 @@
 using JPMC.Hackathon.RapMentor.Contract.Interfaces;
 using JPMC.Hackathon.RapMentor.Contract.Models;
 using JPMC.Hackathon.RapMentor.Services.Adapters;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -14,7 +13,6 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
     {
         private string _baseUrl = "https://0jjmybfxv1.execute-api.us-east-1.amazonaws.com/Prod";
         private readonly ICourseRepository _courseRepository;
-        private readonly IAmazonLambda _lambda;
 
         public CourseService(ICourseRepository courseRepository)
         {
@@ -42,7 +40,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
 
             var httpClient = new HttpClient();
             var headingsTask = httpClient.PostAsJsonAsync($"{_baseUrl}/api/courses/headings", request);
-            var descriptionTask = httpClient.PostAsJsonAsync($"{_baseUrl}/api/courses/description", request);
+            var descriptionTask = httpClient.PostAsJsonAsync($"{_baseUrl}/api/courses/summerization", request);
 
             await Task.WhenAll(headingsTask, descriptionTask);
 
@@ -60,10 +58,9 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
 
                 foreach (var heading in headings)
                 {
-                    var requestWithHeader = new
+                    var requestWithHeader = new HeaderContentRequest
                     {
-                        AuthorId = request.AuthorId,
-                        CoursePrompt = request.CoursePrompt,
+                        Prompt = request.CoursePrompt,
                         Level = request.Level,
                         Duration = request.Duration,
                         Skills = request.Skills,
@@ -77,12 +74,36 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
                 }
 
                 var results = await Task.WhenAll(contentTasks);
+                var module = new List<Module>();
+                foreach (var result in results)
+                {
+                    if (!string.IsNullOrEmpty(result.Content) && !string.IsNullOrEmpty(result.Header) && !result.Content.Contains("Error: InternalServerError"))
+                    {
+                        module.Add(new Module()
+                        {
+                            Title = result.Header,
+                            Content = result.Content
+                        });
+                    }
+                }
+
+                var course = new Course
+                {
+                    Title = request.Title,
+                    AuthorId = request.AuthorId,
+                    Description = description,
+                    Level = request.Level,
+                    CourseStatus = CourseStatus.Draft.ToString(),
+                    Duration = request.Duration,
+                    Modules = module
+                };
+                return course;
 
             }
             return null;
         }
 
-        private static async Task<(string Header, string Content)> FetchContentAsync(HttpClient client, CreateCourseRequest request)
+        private async Task<(string Header, string Content)> FetchContentAsync(HttpClient client, HeaderContentRequest request)
         {
             var response = await client.PostAsJsonAsync($"{_baseUrl}/api/courses/headings/Content", request);
             var content = response.IsSuccessStatusCode
@@ -90,9 +111,6 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
             : $"Error: {response.StatusCode}";
             return (request.Header, content);
         }
-}
-
-            
 
         public async Task<Course> UpdateCourseAsync(string courseId, Course updatedCourse)
         {

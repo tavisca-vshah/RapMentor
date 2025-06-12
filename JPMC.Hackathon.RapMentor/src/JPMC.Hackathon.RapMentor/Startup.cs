@@ -1,6 +1,5 @@
 ﻿using JPMC.Hackathon.RapMentor.Adapter.Dynamodb;
 using JPMC.Hackathon.RapMentor.Contract.Interfaces;
-using JPMC.Hackathon.RapMentor.Mock;
 using JPMC.Hackathon.RapMentor.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,8 +35,10 @@ namespace JPMC.Hackathon.RapMentor
 
             services.AddControllers();
             services.AddSingleton<ICourseService, CourseService>();
-            services.AddSingleton<ICourseRepository, MockCourseRepository>();
+            services.AddSingleton<ICourseRepository, CourseRepository>();
             services.AddSingleton<IQnAService, QnAService>();
+            services.AddSingleton<IDynamoDbFactory, DynamoDbFactory>();
+            services.AddSingleton<IDynamoDbContextProvider, DynamoDbContextProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

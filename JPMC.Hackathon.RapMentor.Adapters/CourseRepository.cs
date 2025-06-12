@@ -1,7 +1,6 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using JPMC.Hackathon.RapMentor.Adapter.Dynamodb.Model;
-using JPMC.Hackathon.RapMentor.Contract.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +10,13 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
 {
     public class CourseRepository : ICourseRepository
     {
-        private readonly IConfigurationProvider _configurationProvider;
         private readonly IDynamoDbContextProvider _dynamoDbContextProvider;
 
         public IDynamoDbFactory _dynamoDbClientFactory { get; }
 
-        public CourseRepository(IDynamoDbFactory dynamoDbFactory, IConfigurationProvider configurationProvider, IDynamoDbContextProvider dynamoDbContextProvider)
+        public CourseRepository(IDynamoDbFactory dynamoDbFactory, IDynamoDbContextProvider dynamoDbContextProvider)
         {
             _dynamoDbClientFactory = dynamoDbFactory;
-            _configurationProvider = configurationProvider;
             _dynamoDbContextProvider = dynamoDbContextProvider;
         }
 
@@ -36,6 +33,7 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
                 };
 
                 var saveObject = course.ToCourseDBObject();
+                saveObject.Id = Guid.NewGuid().ToString();
                 var courseBatch = context.CreateBatchWrite<CourseDataobject>(dynamoDBOperationConfig);
                 courseBatch.AddPutItem(saveObject);
                 await courseBatch.ExecuteAsync();
@@ -47,17 +45,16 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
 
                 var moduleBatch = context.CreateBatchWrite<ModuleDataObject>(dynamoDBOperationConfig);
 
-                var moduleSaveData = course.Modules.Where(x => IsModuleValid(x)).Select(x => x.ToModuleObject(course.Id)).ToList();
-                moduleSaveData.ForEach(x => moduleBatch.AddPutItem(x));
-                await courseBatch.ExecuteAsync();
+                var moduleSaveData = course.Modules.Where(x => IsModuleValid(x)).Select(x => x.ToModuleObject(saveObject.Id)).ToList();
+                moduleSaveData.ForEach(x => { x.ModuleId = Guid.NewGuid().ToString(); moduleBatch.AddPutItem(x); });
+                await moduleBatch.ExecuteAsync();
             }
             return course;
         }
 
         private static bool IsModuleValid(Contract.Models.Module x)
         {
-            return !string.IsNullOrEmpty(x.Content) &&
-                !string.IsNullOrEmpty(x.Summary)
+            return !string.IsNullOrEmpty(x.Content)
                 && !string.IsNullOrEmpty(x.Title);
         }
 
@@ -65,8 +62,9 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
         {
             return new DynamoDbSettings
             {
-                CourseTableName = "courses",
-                ModuleTableName = "modules"
+                CourseTableName = "Courses",
+                ModuleTableName = "modules",
+                Region = "us-east-1"
             };
         }
 
