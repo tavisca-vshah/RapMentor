@@ -43,7 +43,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
             // 1. Call Lambda 1 to get modules list
             var modulesPayload = JsonSerializer.Serialize(new
             {
-                userPrompt = request.UserPrompt,
+                userPrompt = request.CoursePrompt,
                 level = request.Level,
                 additionalModules = request.AdditionalModules
             });
@@ -68,7 +68,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
                 var contentPayload = JsonSerializer.Serialize(new
                 {
                     moduleName = moduleName,
-                    userPrompt = request.UserPrompt,
+                    userPrompt = request.CoursePrompt,
                     level = request.Level,
                     duration = request.Duration,
                     skills = request.Skills
@@ -89,7 +89,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
             // 3. Combine results into a course
             var course = new Course
             {
-                Title = request.UserPrompt,
+                Title = request.CoursePrompt,
                 Modules = moduleContents.ToList(),
                 AuthorId = request.AuthorId,
                 CourseStatus = CourseStatus.Draft.ToString() // default to draft on creation

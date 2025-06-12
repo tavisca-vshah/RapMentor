@@ -21,4 +21,24 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb.Model
         public string AuthorId { get; set; }
     }
 
+    [DynamoDBTable("Modules")]
+    public class ModuleDataObject
+    {
+        [DynamoDBHashKey("course_id")]
+        public string CourseId { get; set; } = Guid.NewGuid().ToString();
+
+        [DynamoDBRangeKey("module_id")]
+        public string ModuleId { get; set; } = Guid.NewGuid().ToString();
+
+        [DynamoDBProperty]
+        public string Title { get; set; }
+        [DynamoDBProperty]
+        public string Summary { get; set; }
+        [DynamoDBProperty]
+        public string? Content { get; set; }
+        [DynamoDBProperty]
+        public int? Duration { get; set; }
+        [DynamoDBProperty]
+        public string? ImageUrl { get; set; }
+    }
 }

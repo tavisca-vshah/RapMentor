@@ -29,5 +29,30 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
                 CourseStatus = course.CourseStatus,
             };
         }
+
+        internal static ModuleDataObject? ToModuleObject(this Contract.Models.Module module, string courseId)
+        {
+            return new ModuleDataObject
+            {
+                Content = module.Content,
+                CourseId = courseId,
+                ModuleId = module.Id,
+                Summary = module.Summary,
+                Title = module.Title,
+                Duration = module.Duration,
+            };
+        }
+
+        internal static Contract.Models.Module? ToModuleModel(this ModuleDataObject module)
+        {
+            return new Contract.Models.Module
+            {
+                Content = module.Content,
+                Id = module.ModuleId,
+                Summary = module.Summary,
+                Title = module.Title,
+                Duration = module.Duration,
+            };
+        }
     }
 }
