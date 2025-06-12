@@ -5,6 +5,7 @@ using Amazon.BedrockRuntime;
 using Amazon.BedrockRuntime.Model;
 using JPMC.Hackathon.RapMentor.Contract.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -81,9 +82,12 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
 
         public static async Task<string> GenerateMessageAsync(string context, QnAPrompt question)
         {
-            question.Prompts.Add(new Prompt { Role = "Assistant", Content = context });
-            
-            question.Prompts.Add(new Prompt { Role = "System", Content = @"
+
+            var messages = new List<Prompt>();
+            messages.Add(new Prompt
+            {
+                Role = "System",
+                Content = @"
                 You are an AI Q&A bot with RAG capabilities. Provide accurate, professional responses using company data first, then supplement with external sources when needed.
 
                 **Response Priority:**
@@ -101,13 +105,17 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 **Example:**
                 User: 'What is ID Everywhere Authentication System?'
                 Response: 'ID Everywhere Authentication provides secure identity verification across platforms, featuring multi-factor authentication (MFA), single sign-on (SSO), federated identity management, and adaptive security protocols.'
-                " });
+                "
+            });
 
+            question.Prompts.Insert(0, messages[0]);
+            question.Prompts.Add(new Prompt { Role = "Assistant", Content = context });
             int promptsSize = question.Prompts.Count;
             string que = question.Prompts[promptsSize - 2].Content;
             // Define the user message.
             var userMessage = $"Use the context below if relevant. Context:\n\"\"\"\n{JsonSerializer.Serialize(question)}\n\"\"\"\n\n Question: {que}";
 
+            messages.Add(new Prompt { Role = "user", Content = userMessage });
             //Format the request payload using the model's native structure.
             var nativeRequest = JsonSerializer.Serialize(new
             {
@@ -129,6 +137,46 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
             };
 
             return await InvokeModelAsync(request);
+
+        }
+
+        public static async Task<List<string>> GetCourseHeadings(CourseHeadersRequest courseHeadersRequest)
+        {
+            var ragPrompt = new
+            {
+                input = courseHeadersRequest,
+
+                rag_instruction = "Using the internal company knowledge base stored in the vector database, generate a structured employee training course. The course should:\n\n" +
+             "- Be based on the topic provided in the 'Prompt'\n" +
+             "- Focus on the listed 'Skills'\n" +
+             "- Match the specified 'Level' of difficulty\n" +
+             "- Fit within the 'Duration' timeframe\n" +
+             "- Include the 'AdditionalModules' as part of the curriculum\n\n" +
+             "Ensure the content is professional, clear, and tailored for internal employee development. If internal data is insufficient, supplement with verified external sources and cite them clearly.\n\n" +
+             "give me comma seperated headerings"
+             };
+
+            var nativeRequest = JsonSerializer.Serialize(new
+            {
+                anthropic_version = "bedrock-2023-05-31",
+                max_tokens = 512,
+                temperature = 0.5,
+                messages = new[]
+                {
+                      new { role = "user", content = JsonSerializer.Serialize(ragPrompt) }
+                }
+            });
+
+            // Create a request with the model ID and the model's native request payload.
+            var request = new InvokeModelRequest()
+            {
+                ModelId = modelArn,
+                Body = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(nativeRequest)),
+                ContentType = "application/json"
+            };
+
+            var res = await InvokeModelAsync(request);
+            return res.Split(",").ToList();
 
         }
 
