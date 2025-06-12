@@ -31,7 +31,7 @@ namespace JPMC.Hackathon.RapMentor.Controllers
         public async Task<Prompt> Post([FromBody] QnAPrompt prompt)
         {
             var res =  await _qnAService.GetRagQnAAsync(prompt);
-            return new Prompt { Role = "assistant", Content = res };
+            return new Prompt { role = "assistant", content = res };
         }
 
     }

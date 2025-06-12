@@ -69,5 +69,12 @@ namespace JPMC.Hackathon.RapMentor.Controllers
         {
             return await _courseService.GetCourseHeadings(request);
         }
+
+        // POST api/<CourseController>
+        [HttpPost("headings/Content")]
+        public async Task<String> GetHeaderContent([FromBody] HeaderContentRequest request)
+        {
+            return await _courseService.GetHeaderContent(request);
+        }
     }
 }

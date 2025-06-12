@@ -10,7 +10,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
     {
         public async Task<string> GetRagQnAAsync(QnAPrompt input)
         {
-            var res =  await BedrockKBAdapter.GetRagQnAAsync(input.Prompts.Last().Content);
+            var res =  await BedrockKBAdapter.GetRagQnAAsync(input.Prompts.Last().content);
             return await BedrockKBAdapter.GenerateMessageAsync(res, input);
         }
        
