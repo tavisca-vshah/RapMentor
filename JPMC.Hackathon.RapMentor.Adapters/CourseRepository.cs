@@ -53,8 +53,8 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
                 var moduleSaveData = course.Modules.Where(x => IsModuleValid(x)).Select(x => x.ToModuleObject(saveObject.Id)).ToList();
                 moduleSaveData.ForEach(x => { x.ModuleId = Guid.NewGuid().ToString(); moduleBatch.AddPutItem(x); });
                 await moduleBatch.ExecuteAsync();
+                return saveObject.ToCourseModel();
             }
-            return course;
         }
 
         private static bool IsModuleValid(Contract.Models.Module x)

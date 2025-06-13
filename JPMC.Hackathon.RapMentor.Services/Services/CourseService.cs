@@ -154,7 +154,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
 
             await _courseRepository.PublishCourseAsync(courseId, existingCourse);
 
-            var courseUploader = new CourseUploader("rag-input-2025");
+            var courseUploader = new CourseUploader("rampup-knowledge-bucket");
             await courseUploader.UploadCourseToS3Async(existingCourse, "courses/docs", $"{courseId}.txt");
 
             return existingCourse;
