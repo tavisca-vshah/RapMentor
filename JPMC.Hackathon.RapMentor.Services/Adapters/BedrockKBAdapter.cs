@@ -127,13 +127,13 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
         public static async Task<List<string>> GetCourseHeadings(CourseHeadersRequest courseHeadersRequest)
         {
             
-            
             var text = @"
                 You are a course architect and learning experience designer. Your task is to generate a comma-separated list of high-level topic headings for a course based on the provided context.
+                Use data available in vector db and if require use external sources data also.
  
                 Design the course using the following structure:
                 1. CourseName/ProductName Overview[only if we can write content about that product]
-                2. Course low level design
+                2. Course low level design (if required)
                 3. Technologies Used
                 4. Services or Tools Used
                 5. System Architecture
@@ -159,10 +159,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
 
         public static async Task<string> Getheadercontent(HeaderContentRequest courseHeadersRequest)
         {
-            var messages = new List<Prompt> { new Prompt
-            {
-                role = "user",
-                content = $@"
+            var text = $@"
                 You are a course content generator. Your task is to create detailed, beginner-friendly content for a specific course topic, based on the overall course context.
  
                 Guidelines:
@@ -178,27 +175,9 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 Do not include introductory or closing remarks unless the topic itself requires it.
                 
                
-                Query: " + JsonSerializer.Serialize(courseHeadersRequest)
-            }
-            };
+                Query: " + JsonSerializer.Serialize(courseHeadersRequest);
 
-            var nativeRequest = JsonSerializer.Serialize(new
-            {
-                anthropic_version = "bedrock-2023-05-31",
-                max_tokens = 512,
-                temperature = 0.5,
-                messages = messages
-            });
-
-            // Create a request with the model ID and the model's native request payload.
-            var request = new InvokeModelRequest()
-            {
-                ModelId = modelArn,
-                Body = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(nativeRequest)),
-                ContentType = "application/json"
-            };
-
-            return await InvokeModelAsync(request);
+            return await RagAsync(text);
         }
 
         public static async Task<string> GetCourseSummerization(CourseHeadersRequest courseHeadersRequest)
