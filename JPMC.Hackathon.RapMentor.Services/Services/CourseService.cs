@@ -168,6 +168,9 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
             return BedrockKBAdapter.Getheadercontent(request);
         }
 
-
+        public Task<string> GetGoal(GoalRequest request)
+        {
+            return BedrockKBAdapter.GetRagGoalAsync(request);
+        }
     }
 }

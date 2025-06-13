@@ -95,5 +95,12 @@ namespace JPMC.Hackathon.RapMentor.Controllers
         {
             return await _courseService.GetCourseSummerization(request);
         }
+
+        // POST api/<CourseController>
+        [HttpPost("goal")]
+        public async Task<String> GetGoal([FromBody] GoalRequest request)
+        {
+            return await _courseService.GetGoal(request);
+        }
     }
 }
