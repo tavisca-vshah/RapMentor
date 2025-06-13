@@ -12,26 +12,17 @@ using System.Reflection.Emit;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace JPMC.Hackathon.RapMentor.Services.Adapters
 {
     public class BedrockKBAdapter
     {
         static string modelArn = "anthropic.claude-3-sonnet-20240229-v1:0";
+        static string knowledgeBaseId = "R9FO1ASDHC";
         public static async Task<string> GetRagQnAAsync(string prompt)
         {
-
-            string knowledgeBaseId = "R9FO1ASDHC";
-
-            var client = new AmazonBedrockAgentRuntimeClient(RegionEndpoint.USEast1);
-
-            try
-            {
-                var request = new RetrieveAndGenerateRequest
-                {
-                    Input = new RetrieveAndGenerateInput
-                    {
-                        Text = @"
+            var text = @"
                 You are an AI Q&A bot with RAG capabilities. Provide accurate, professional responses using company data first, then supplement with external sources when needed.
 
                 **Response Priority:**
@@ -49,35 +40,33 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 **Example:**
                 User: 'What is ID Everywhere Authentication System?'
                 Response: 'ID Everywhere Authentication provides secure identity verification across platforms, featuring multi-factor authentication (MFA), single sign-on (SSO), federated identity management, and adaptive security protocols.'
-                Question:"  + prompt,
-                    },
-                    RetrieveAndGenerateConfiguration = new RetrieveAndGenerateConfiguration
-                    {
-                        KnowledgeBaseConfiguration = new KnowledgeBaseRetrieveAndGenerateConfiguration
-                        {
-                            KnowledgeBaseId = knowledgeBaseId,
-                            ModelArn = modelArn
-                        },
-                        Type = RetrieveAndGenerateType.KNOWLEDGE_BASE,
+                Question:" + prompt;
 
-                    }
-                };
+            
+            return await RagAsync(text);
+        }
 
-                var response = await client.RetrieveAndGenerateAsync(request);
+        public static async Task<string> GetRagGoalAsync(GoalRequest request)
+        {
+            var text = @"
+                You are an AI Q&A assistant with Retrieval-Augmented Generation (RAG) capabilities. Your task is to provide personalized, role-specific skill improvement recommendations for employees. Use internal company documents as the primary source, especially those categorized by role, team, and skill development. Supplement with verified external sources only if internal data is insufficient.
+                **Guidelines:**
+                - Professional, clear, and concise tone
+                - Structure with bullet points/headings when helpful
+                - Provide only verified information if not then return probable result
+                - State 'Based on available information' if uncertain
+                - Include brief explanations for technical topics
+                - Give role information and team information also
+                - Give more details as possible 
 
-                return response.Output.Text;
-            }
-            catch (AmazonBedrockAgentRuntimeException ex)
-            {
-                // Handle specific exceptions related to AWS SDK
-                Console.WriteLine($"AWS Error: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                // Handle other potential exceptions
-                Console.WriteLine($"General Error: {ex.Message}");
-            }
-            return "";
+                Employee Details:
+                   " +
+                   JsonSerializer.Serialize(request)
+                   +
+                @"
+                Please suggest actionable steps or learning paths tailored for the employee's role.";
+
+            return await RagAsync(text);
         }
 
 
@@ -100,6 +89,10 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 - Provide only verified information if not then return probable result
                 - State 'Based on available information' if uncertain
                 - Include brief explanations for technical topics
+                - Use proper spacing, line breaks, and indentation to improve readability.
+                - Add new lines between paragraphs, sections, and code blocks to avoid clutter.
+                - Ensure code blocks or examples are clearly formatted and indented.
+                - Avoid long paragraphs; keep sentences and sections concise.
 
                 **Example:**
                 User: 'What is ID Everywhere Authentication System?'
@@ -280,6 +273,46 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 Console.WriteLine($"ERROR: Can't invoke '{modelArn}'. Reason: {e.Message}");
                 throw;
             }
+        }
+
+        private static async Task<string> RagAsync(string text)
+        {
+            try
+            {
+                var client = new AmazonBedrockAgentRuntimeClient(RegionEndpoint.USEast1);
+                var request = new RetrieveAndGenerateRequest
+                {
+                    Input = new RetrieveAndGenerateInput
+                    {
+                        Text = text,
+                    },
+                    RetrieveAndGenerateConfiguration = new RetrieveAndGenerateConfiguration
+                    {
+                        KnowledgeBaseConfiguration = new KnowledgeBaseRetrieveAndGenerateConfiguration
+                        {
+                            KnowledgeBaseId = knowledgeBaseId,
+                            ModelArn = modelArn
+                        },
+                        Type = RetrieveAndGenerateType.KNOWLEDGE_BASE,
+
+                    }
+                };
+
+                var response = await client.RetrieveAndGenerateAsync(request);
+
+                return response.Output.Text;
+            }
+            catch (AmazonBedrockAgentRuntimeException ex)
+            {
+                // Handle specific exceptions related to AWS SDK
+                Console.WriteLine($"AWS Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Handle other potential exceptions
+                Console.WriteLine($"General Error: {ex.Message}");
+            }
+            return "";
         }
 
 
