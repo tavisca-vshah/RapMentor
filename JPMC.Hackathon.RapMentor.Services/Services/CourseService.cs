@@ -30,11 +30,20 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
 
         public async Task<Course> CreateCourseAsync(CreateCourseRequest request)
         {
-            var course = await FormulateCourseAsync(request);
+            var basicCourse = new Course
+            {
+                AuthorId = request.AuthorId,
+                Title = request.Title,
+                Duration = request.Duration,
+                Level = request.Level,
+                CourseStatus = CourseStatus.GeneratingDraft.ToString()
+            };
+            var courseWithBasicDetial = await _courseRepository.CreateCourseAsync(basicCourse);
+            var course = await FormulateCourseAsync(courseWithBasicDetial.Id, request);
             return await _courseRepository.CreateCourseAsync(course);
         }
 
-        public async Task<Course> FormulateCourseAsync(CreateCourseRequest request)
+        public async Task<Course> FormulateCourseAsync(string courseId, CreateCourseRequest request)
         {
             // 1. Call Lambda 1 to get modules list
 
@@ -89,6 +98,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
 
                 var course = new Course
                 {
+                    Id = courseId,
                     Title = request.Title,
                     AuthorId = request.AuthorId,
                     Description = description,
@@ -131,12 +141,13 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
 
         public async Task<Course> PublishCourseAsync(string courseId)
         {
-            await _courseRepository.PublishCourseAsync(courseId);
             var existingCourse = await _courseRepository.GetAsync(courseId);
             if (existingCourse == null)
                 throw new KeyNotFoundException($"Course with ID {courseId} not found.");
 
-            var courseUploader = new CourseUploader("BucketName");
+            await _courseRepository.PublishCourseAsync(courseId, existingCourse);
+
+            var courseUploader = new CourseUploader("rag-input-2025");
             await courseUploader.UploadCourseToS3Async(existingCourse, "courses/docs", $"{courseId}.txt");
 
             return existingCourse;

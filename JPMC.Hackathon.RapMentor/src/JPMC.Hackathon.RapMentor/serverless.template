@@ -12,7 +12,7 @@
         "Runtime": "dotnet8",
         "CodeUri": "",
         "MemorySize": 512,
-        "Timeout": 30,
+        "Timeout": 900,
         "Role": null,
         "Policies": [
           "AWSLambda_FullAccess"

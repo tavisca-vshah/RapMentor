@@ -34,7 +34,11 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
                 };
 
                 var saveObject = course.ToCourseDBObject();
-                saveObject.Id = Guid.NewGuid().ToString();
+                if (string.IsNullOrWhiteSpace(saveObject.Id))
+                {
+                    saveObject.Id = Guid.NewGuid().ToString();
+                }
+
                 var courseBatch = context.CreateBatchWrite<CourseDataobject>(dynamoDBOperationConfig);
                 courseBatch.AddPutItem(saveObject);
                 await courseBatch.ExecuteAsync();
