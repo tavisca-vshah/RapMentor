@@ -132,9 +132,8 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 Use data available in vector db and if require use external sources data also.
                 You should give course heading step by step learning wise and not give irrelevent headings.
  
-                Design the course using the following structure:
+                example of headings:
                 1. CourseName/ProductName Overview[only if we can write content about that product]
-                2. Course low level design (if required)
                 3. Technologies Used
                 4. Services or Tools Used
                 5. System Architecture
