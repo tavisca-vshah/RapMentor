@@ -177,7 +177,42 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                
                 Query: " + JsonSerializer.Serialize(courseHeadersRequest);
 
-            return await RagAsync(text);
+            var res = await RagAsync(text);
+            var messages = new List<Prompt> { 
+                    new Prompt
+                {
+                    role = "user",
+                    content =  text
+                },
+                new Prompt
+                {
+                    role = "assistant",
+                    content = res
+                },
+                new Prompt
+                {
+                    role = "user",
+                    content = "Here in above if response from assistant then refactor it otherwise give me answer according to you starting with data is not available but here some information for available: "
+                }
+            };
+
+            var nativeRequest = JsonSerializer.Serialize(new
+            {
+                anthropic_version = "bedrock-2023-05-31",
+                max_tokens = 512,
+                temperature = 0.5,
+                messages = messages
+            });
+
+            // Create a request with the model ID and the model's native request payload.
+            var request = new InvokeModelRequest()
+            {
+                ModelId = modelArn,
+                Body = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(nativeRequest)),
+                ContentType = "application/json"
+            };
+
+            return await InvokeModelAsync(request);
         }
 
         public static async Task<string> GetCourseSummerization(CourseHeadersRequest courseHeadersRequest)
