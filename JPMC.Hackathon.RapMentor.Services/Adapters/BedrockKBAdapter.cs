@@ -126,49 +126,33 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
 
         public static async Task<List<string>> GetCourseHeadings(CourseHeadersRequest courseHeadersRequest)
         {
-            var messages = new List<Prompt> { new Prompt
-            {
-                role = "user",
-                content = @"
-                    You are a course architect and learning experience designer. Your task is to generate a comma-separated list of high-level topic headings for a course based on the provided context.
+            
+            
+            var text = @"
+                You are a course architect and learning experience designer. Your task is to generate a comma-separated list of high-level topic headings for a course based on the provided context.
  
-                    Design the course using the following structure:
-                    1. CourseName/ProductName Overview[only if we can write content about that product]
-                    2. Technologies Used
-                    3. Services or Tools Used
-                    4. System Architecture
-                    5. Core Functional Modules (based on the course prompt and skills)
-                    6. Additional Modules (based on the 'Additional Modules' input)
+                Design the course using the following structure:
+                1. CourseName/ProductName Overview[only if we can write content about that product]
+                2. Course low level design
+                3. Technologies Used
+                4. Services or Tools Used
+                5. System Architecture
+                6. Core Functional Modules (based on the course prompt and skills)
+                7. Additional Modules (based on the 'Additional Modules' input)
  
-                    Ensure the course is appropriate for the specified level and duration. The output should be a single, logically ordered, comma-separated list of topic headings.
+                Ensure the course is appropriate for the specified level and duration. The output should be a single, logically ordered, comma-separated list of topic headings.
  
-                    Example:
-                    For a course on 'Learn Web Development' with skills 'HTML, CSS', and additional modules 'Responsive Design, SEO Basics', the output might be:
-                    Course Overview, Technologies Used, Services or Tools Used, System Architecture, HTML Basics, CSS Fundamentals, Building Your First Web Page, Responsive Design, SEO Basics
+                Example:
+                For a course on 'Learn Web Development' with skills 'HTML, CSS', and additional modules 'Responsive Design, SEO Basics', the output might be:
+                Course Overview, Technologies Used, Services or Tools Used, System Architecture, HTML Basics, CSS Fundamentals, Building Your First Web Page, Responsive Design, SEO Basics
  
-                    Respond with only the topic headings, separated by commas. Do not include any explanations or formatting.
+                Respond with only the topic headings, separated by commas. Do not include any explanations or formatting.
                     
-                    query: " + JsonSerializer.Serialize(courseHeadersRequest)
-            }
-            };
-
-            var nativeRequest = JsonSerializer.Serialize(new
-            {
-                anthropic_version = "bedrock-2023-05-31",
-                max_tokens = 512,
-                temperature = 0.5,
-                messages = messages
-            });
+                query: " + JsonSerializer.Serialize(courseHeadersRequest);
+            
 
             // Create a request with the model ID and the model's native request payload.
-            var request = new InvokeModelRequest()
-            {
-                ModelId = modelArn,
-                Body = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(nativeRequest)),
-                ContentType = "application/json"
-            };
-
-            var res = await InvokeModelAsync(request);
+            var res = await RagAsync(text);
             return res.Split(",").ToList();
 
         }
