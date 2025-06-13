@@ -130,6 +130,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
             var text = @"
                 You are a course architect and learning experience designer. Your task is to generate a comma-separated list of high-level topic headings for a course based on the provided context.
                 Use data available in vector db and if require use external sources data also.
+                You should give course heading step by step learning wise and not give irrelevent headings.
  
                 Design the course using the following structure:
                 1. CourseName/ProductName Overview[only if we can write content about that product]
