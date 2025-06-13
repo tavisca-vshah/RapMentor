@@ -162,7 +162,46 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
 
         public async Task<Contract.Models.Course> UpdateCourseAsync(Contract.Models.Course course)
         {
-            throw new NotImplementedException();
+            var dbSetting = await GetDynamoDbSetting();
+            var client = await _dynamoDbClientFactory.GetClientAsync(dbSetting);
+
+            using (var context = _dynamoDbContextProvider.GetDynamoDbContext(client))
+            {
+                var dynamoDBOperationConfig = new BatchWriteConfig
+                {
+                    OverrideTableName = dbSetting.CourseTableName
+                };
+
+                var saveObject = course.ToCourseDBObject();
+                if (string.IsNullOrWhiteSpace(saveObject.Id))
+                {
+                    saveObject.Id = Guid.NewGuid().ToString();
+                }
+
+                var courseBatch = context.CreateBatchWrite<CourseDataobject>(dynamoDBOperationConfig);
+                courseBatch.AddPutItem(saveObject);
+                await courseBatch.ExecuteAsync();
+
+                dynamoDBOperationConfig = new BatchWriteConfig
+                {
+                    OverrideTableName = dbSetting.ModuleTableName
+                };
+
+                var moduleBatch = context.CreateBatchWrite<ModuleDataObject>(dynamoDBOperationConfig);
+
+                var moduleSaveData = course.Modules.Where(x => IsModuleValid(x)).Select(x => x.ToModuleObject(saveObject.Id)).ToList();
+                foreach (var module in moduleSaveData)
+                {
+                    if (string.IsNullOrEmpty(module.ModuleId))
+                    {
+                        module.ModuleId = Guid.NewGuid().ToString();
+                    }
+                    moduleBatch.AddPutItem(module);
+                }
+
+                await moduleBatch.ExecuteAsync();
+            }
+            return course;
         }
 
         private async Task<List<ModuleDataObject>> GetModuleAsync(string courseId)
@@ -189,6 +228,32 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
                     } while (!search.IsDone);
 
                     return moduleDataObject;
+                }
+            }
+            catch (AmazonDynamoDBException ex)
+            {
+                throw new Exception("Something went wrong try again later");
+            }
+        }
+
+        public async Task DeleteModuleAsync(string courseid, List<string> modules)
+        {
+            var dynamoDbSettings = await GetDynamoDbSetting();
+
+            var client = await _dynamoDbClientFactory.GetClientAsync(dynamoDbSettings);
+            try
+            {
+                using (var context = _dynamoDbContextProvider.GetDynamoDbContext(client))
+                {
+                    var queryConfig = new BatchWriteConfig
+                    {
+                        OverrideTableName = dynamoDbSettings.ModuleTableName
+                    };
+
+                    var moduleUpdateBatch = context.CreateBatchWrite<ModuleDataObject>(queryConfig);
+                    modules.ForEach(moduleId => moduleUpdateBatch.AddDeleteKey(courseid, moduleId));
+
+                    await moduleUpdateBatch.ExecuteAsync();
                 }
             }
             catch (AmazonDynamoDBException ex)

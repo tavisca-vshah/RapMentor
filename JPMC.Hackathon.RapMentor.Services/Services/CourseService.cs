@@ -3,6 +3,7 @@ using JPMC.Hackathon.RapMentor.Contract.Interfaces;
 using JPMC.Hackathon.RapMentor.Contract.Models;
 using JPMC.Hackathon.RapMentor.Services.Adapters;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -131,8 +132,14 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
 
             // 2. Update fields (you can update only allowed fields)
             existingCourse.Title = updatedCourse.Title ?? existingCourse.Title;
-            existingCourse.Modules = updatedCourse.Modules ?? existingCourse.Modules;
+            existingCourse.Description = updatedCourse.Description ?? existingCourse.Description;
 
+            var newModuleIds = updatedCourse.Modules.Select(x => x.Id).ToHashSet();
+            var moduleToDelete = existingCourse.Modules.Where(x => !newModuleIds.Contains(x.Id)).Select(x => x.Id).ToList();
+
+            await _courseRepository.DeleteModuleAsync(courseId, moduleToDelete);
+
+            existingCourse.Modules = updatedCourse.Modules ?? existingCourse.Modules;
             // 3. Save updated course back to DynamoDB
             await _courseRepository.UpdateCourseAsync(existingCourse);
 

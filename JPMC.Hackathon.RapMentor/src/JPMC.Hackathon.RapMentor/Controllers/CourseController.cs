@@ -55,9 +55,9 @@ namespace JPMC.Hackathon.RapMentor.Controllers
 
         // PUT api/<CourseController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCourseAsync(string id, [FromBody] Course value)
+        public async Task<IActionResult> UpdateCourseAsync(string id, [FromBody] Course updatedCourse)
         {
-            var courseDetial = await _courseService.UpdateCourseAsync(id, value);
+            var courseDetial = await _courseService.UpdateCourseAsync(id, updatedCourse);
             return Ok(courseDetial);
         }
 

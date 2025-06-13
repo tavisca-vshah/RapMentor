@@ -11,5 +11,6 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
         Task<Course> GetAsync(string id);
         Task PublishCourseAsync(string id, Course course);
         Task<Course> UpdateCourseAsync(Course course);
+        Task DeleteModuleAsync(string courseid, List<string> modules);
     }
 }
