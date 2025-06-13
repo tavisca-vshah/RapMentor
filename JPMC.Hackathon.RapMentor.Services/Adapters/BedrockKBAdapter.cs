@@ -19,7 +19,7 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
     public class BedrockKBAdapter
     {
         static string modelArn = "anthropic.claude-3-sonnet-20240229-v1:0";
-        static string knowledgeBaseId = "R9FO1ASDHC";
+        static string knowledgeBaseId = "UUUDGIZAZM";
         public static async Task<string> GetRagQnAAsync(string prompt)
         {
             var text = @"
@@ -37,9 +37,6 @@ namespace JPMC.Hackathon.RapMentor.Services.Adapters
                 - State 'Based on available information' if uncertain
                 - Include brief explanations for technical topics
 
-                **Example:**
-                User: 'What is ID Everywhere Authentication System?'
-                Response: 'ID Everywhere Authentication provides secure identity verification across platforms, featuring multi-factor authentication (MFA), single sign-on (SSO), federated identity management, and adaptive security protocols.'
                 Question:" + prompt;
 
             
