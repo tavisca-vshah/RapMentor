@@ -42,7 +42,14 @@ namespace JPMC.Hackathon.RapMentor.Controllers
         public async Task<IActionResult> GetAsync(string id)
         {
             var courseDetial = await _courseService.GetAsync(id);
-            return Ok(courseDetial);
+            if (courseDetial != null)
+            {
+                return Ok(courseDetial);
+            }
+            else
+            {
+                return NotFound($"Course with id {id} not found");
+            }
         }
 
         // POST api/<CourseController>
@@ -70,8 +77,10 @@ namespace JPMC.Hackathon.RapMentor.Controllers
 
         // DELETE api/<CourseController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> DeleteAsync(string id)
         {
+            await _courseService.DeleteAsync(id);
+            return Ok("Course Deleted");
         }
 
         // POST api/<CourseController>

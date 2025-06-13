@@ -109,10 +109,17 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
                     };
 
                     var courseDataObject = await context.LoadAsync<CourseDataobject>(id, queryConfig);
-                    var moduleDataObject = await GetModuleAsync(id);
-                    var course = courseDataObject.ToCourseModel();
-                    moduleDataObject.ForEach(x => course.Modules.Add(x.ToModuleModel()));
-                    return course;
+                    if (courseDataObject != null)
+                    {
+                        var moduleDataObject = await GetModuleAsync(id);
+                        var course = courseDataObject.ToCourseModel();
+                        moduleDataObject.ForEach(x => course.Modules.Add(x.ToModuleModel()));
+                        return course;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
             catch (AmazonDynamoDBException ex)
@@ -252,6 +259,32 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
 
                     var moduleUpdateBatch = context.CreateBatchWrite<ModuleDataObject>(queryConfig);
                     modules.ForEach(moduleId => moduleUpdateBatch.AddDeleteKey(courseid, moduleId));
+
+                    await moduleUpdateBatch.ExecuteAsync();
+                }
+            }
+            catch (AmazonDynamoDBException ex)
+            {
+                throw new Exception("Something went wrong try again later");
+            }
+        }
+
+        public async Task DeleteAsync(string courseId)
+        {
+            var dynamoDbSettings = await GetDynamoDbSetting();
+
+            var client = await _dynamoDbClientFactory.GetClientAsync(dynamoDbSettings);
+            try
+            {
+                using (var context = _dynamoDbContextProvider.GetDynamoDbContext(client))
+                {
+                    var queryConfig = new BatchWriteConfig
+                    {
+                        OverrideTableName = dynamoDbSettings.CourseTableName
+                    };
+
+                    var moduleUpdateBatch = context.CreateBatchWrite<CourseDataobject>(queryConfig);
+                    moduleUpdateBatch.AddDeleteKey(courseId);
 
                     await moduleUpdateBatch.ExecuteAsync();
                 }

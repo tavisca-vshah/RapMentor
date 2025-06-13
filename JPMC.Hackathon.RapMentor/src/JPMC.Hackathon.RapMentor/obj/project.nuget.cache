@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lasRqJwAibA=",
+  "dgSpecHash": "Ywd6/YHDML4=",
   "success": true,
   "projectFilePath": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor\\src\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,8 @@
     "C:\\Users\\N747459\\.nuget\\packages\\awssdk.bedrockruntime\\4.0.0.7\\awssdk.bedrockruntime.4.0.0.7.nupkg.sha512",
     "C:\\Users\\N747459\\.nuget\\packages\\awssdk.core\\4.0.0.9\\awssdk.core.4.0.0.9.nupkg.sha512",
     "C:\\Users\\N747459\\.nuget\\packages\\awssdk.dynamodbv2\\4.0.1.5\\awssdk.dynamodbv2.4.0.1.5.nupkg.sha512",
+    "C:\\Users\\N747459\\.nuget\\packages\\awssdk.lambda\\4.0.0.7\\awssdk.lambda.4.0.0.7.nupkg.sha512",
+    "C:\\Users\\N747459\\.nuget\\packages\\awssdk.s3\\4.0.1.5\\awssdk.s3.4.0.1.5.nupkg.sha512",
     "C:\\Users\\N747459\\.nuget\\packages\\bogus\\35.6.3\\bogus.35.6.3.nupkg.sha512",
     "C:\\Users\\N747459\\.nuget\\packages\\microsoft.extensions.configuration\\2.1.0\\microsoft.extensions.configuration.2.1.0.nupkg.sha512",
     "C:\\Users\\N747459\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\2.1.0\\microsoft.extensions.configuration.abstractions.2.1.0.nupkg.sha512",
@@ -24,8 +26,7 @@
     "C:\\Users\\N747459\\.nuget\\packages\\microsoft.extensions.options\\2.1.0\\microsoft.extensions.options.2.1.0.nupkg.sha512",
     "C:\\Users\\N747459\\.nuget\\packages\\microsoft.extensions.primitives\\2.1.0\\microsoft.extensions.primitives.2.1.0.nupkg.sha512",
     "C:\\Users\\N747459\\.nuget\\packages\\system.memory\\4.5.0\\system.memory.4.5.0.nupkg.sha512",
-    "C:\\Users\\N747459\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.0\\system.runtime.compilerservices.unsafe.4.5.0.nupkg.sha512",
-    "C:\\Users\\N747459\\.nuget\\packages\\microsoft.netcore.app.host.linux-x64\\8.0.16\\microsoft.netcore.app.host.linux-x64.8.0.16.nupkg.sha512"
+    "C:\\Users\\N747459\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.0\\system.runtime.compilerservices.unsafe.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

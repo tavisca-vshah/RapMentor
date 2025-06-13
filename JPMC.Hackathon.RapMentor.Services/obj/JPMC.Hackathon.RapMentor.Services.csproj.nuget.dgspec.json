@@ -67,11 +67,6 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
         }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
-        }
       }
     },
     "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Services\\JPMC.Hackathon.RapMentor.Services.csproj": {
@@ -131,6 +126,14 @@
             "AWSSDK.BedrockRuntime": {
               "target": "Package",
               "version": "[4.0.0.7, )"
+            },
+            "AWSSDK.Lambda": {
+              "target": "Package",
+              "version": "[4.0.0.7, )"
+            },
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[4.0.1.5, )"
             }
           },
           "imports": [
@@ -150,11 +153,6 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
         }
       }
     }

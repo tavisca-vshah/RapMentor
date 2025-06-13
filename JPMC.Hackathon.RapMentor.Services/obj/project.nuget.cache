@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "nPux5jUfn7s=",
+  "dgSpecHash": "SOR5m+aFUwQ=",
   "success": true,
   "projectFilePath": "C:\\development\\hackathon\\JPMC.Hackathon.RapMentor\\JPMC.Hackathon.RapMentor.Services\\JPMC.Hackathon.RapMentor.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\N747459\\.nuget\\packages\\awssdk.bedrockagentruntime\\4.0.4.2\\awssdk.bedrockagentruntime.4.0.4.2.nupkg.sha512",
     "C:\\Users\\N747459\\.nuget\\packages\\awssdk.bedrockruntime\\4.0.0.7\\awssdk.bedrockruntime.4.0.0.7.nupkg.sha512",
-    "C:\\Users\\N747459\\.nuget\\packages\\awssdk.core\\4.0.0.9\\awssdk.core.4.0.0.9.nupkg.sha512"
+    "C:\\Users\\N747459\\.nuget\\packages\\awssdk.core\\4.0.0.9\\awssdk.core.4.0.0.9.nupkg.sha512",
+    "C:\\Users\\N747459\\.nuget\\packages\\awssdk.lambda\\4.0.0.7\\awssdk.lambda.4.0.0.7.nupkg.sha512",
+    "C:\\Users\\N747459\\.nuget\\packages\\awssdk.s3\\4.0.1.5\\awssdk.s3.4.0.1.5.nupkg.sha512"
   ],
   "logs": []
 }

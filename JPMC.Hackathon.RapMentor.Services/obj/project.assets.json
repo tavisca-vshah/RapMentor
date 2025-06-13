@@ -47,59 +47,34 @@
           }
         }
       },
-      "JPMC.Hackathon.RapMentor.Contract/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/JPMC.Hackathon.RapMentor.Contract.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/JPMC.Hackathon.RapMentor.Contract.dll": {}
-        }
-      }
-    },
-    "net8.0/linux-x64": {
-      "AWSSDK.BedrockAgentRuntime/4.0.4.2": {
+      "AWSSDK.Lambda/4.0.0.7": {
         "type": "package",
         "dependencies": {
           "AWSSDK.Core": "[4.0.0.9, 5.0.0)"
         },
         "compile": {
-          "lib/net8.0/AWSSDK.BedrockAgentRuntime.dll": {
+          "lib/net8.0/AWSSDK.Lambda.dll": {
             "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net8.0/AWSSDK.BedrockAgentRuntime.dll": {
+          "lib/net8.0/AWSSDK.Lambda.dll": {
             "related": ".pdb;.xml"
           }
         }
       },
-      "AWSSDK.BedrockRuntime/4.0.0.7": {
+      "AWSSDK.S3/4.0.1.5": {
         "type": "package",
         "dependencies": {
           "AWSSDK.Core": "[4.0.0.9, 5.0.0)"
         },
         "compile": {
-          "lib/net8.0/AWSSDK.BedrockRuntime.dll": {
+          "lib/net8.0/AWSSDK.S3.dll": {
             "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net8.0/AWSSDK.BedrockRuntime.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "AWSSDK.Core/4.0.0.9": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/AWSSDK.Core.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/AWSSDK.Core.dll": {
+          "lib/net8.0/AWSSDK.S3.dll": {
             "related": ".pdb;.xml"
           }
         }
@@ -201,6 +176,64 @@
         "tools/account-management.ps1"
       ]
     },
+    "AWSSDK.Lambda/4.0.0.7": {
+      "sha512": "r+xMxiIRVKNhIfG/WAPFtSLtoNBBDWcnG4MvW67WRboCYAZ5JRJ3M4Yy/bM80EmfgxL9wAofaDJF3m5lICS3bA==",
+      "type": "package",
+      "path": "awssdk.lambda/4.0.0.7",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.Lambda.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.lambda.4.0.0.7.nupkg.sha512",
+        "awssdk.lambda.nuspec",
+        "images/AWSLogo.png",
+        "lib/net472/AWSSDK.Lambda.dll",
+        "lib/net472/AWSSDK.Lambda.pdb",
+        "lib/net472/AWSSDK.Lambda.xml",
+        "lib/net8.0/AWSSDK.Lambda.dll",
+        "lib/net8.0/AWSSDK.Lambda.pdb",
+        "lib/net8.0/AWSSDK.Lambda.xml",
+        "lib/netcoreapp3.1/AWSSDK.Lambda.dll",
+        "lib/netcoreapp3.1/AWSSDK.Lambda.pdb",
+        "lib/netcoreapp3.1/AWSSDK.Lambda.xml",
+        "lib/netstandard2.0/AWSSDK.Lambda.dll",
+        "lib/netstandard2.0/AWSSDK.Lambda.pdb",
+        "lib/netstandard2.0/AWSSDK.Lambda.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "AWSSDK.S3/4.0.1.5": {
+      "sha512": "+To1cXvlUq3CLyb8bEe+6a1PE10pGnLgf6ptjbv9acr8QjGuq25mNxWvYu0eaWEpgOGnEeVr7+k+1JcClkWy+w==",
+      "type": "package",
+      "path": "awssdk.s3/4.0.1.5",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.S3.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.s3.4.0.1.5.nupkg.sha512",
+        "awssdk.s3.nuspec",
+        "images/AWSLogo.png",
+        "lib/net472/AWSSDK.S3.dll",
+        "lib/net472/AWSSDK.S3.pdb",
+        "lib/net472/AWSSDK.S3.xml",
+        "lib/net8.0/AWSSDK.S3.dll",
+        "lib/net8.0/AWSSDK.S3.pdb",
+        "lib/net8.0/AWSSDK.S3.xml",
+        "lib/netcoreapp3.1/AWSSDK.S3.dll",
+        "lib/netcoreapp3.1/AWSSDK.S3.pdb",
+        "lib/netcoreapp3.1/AWSSDK.S3.xml",
+        "lib/netstandard2.0/AWSSDK.S3.dll",
+        "lib/netstandard2.0/AWSSDK.S3.pdb",
+        "lib/netstandard2.0/AWSSDK.S3.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
     "JPMC.Hackathon.RapMentor.Contract/1.0.0": {
       "type": "project",
       "path": "../JPMC.Hackathon.RapMentor.Contract/JPMC.Hackathon.RapMentor.Contract.csproj",
@@ -211,6 +244,8 @@
     "net8.0": [
       "AWSSDK.BedrockAgentRuntime >= 4.0.4.2",
       "AWSSDK.BedrockRuntime >= 4.0.0.7",
+      "AWSSDK.Lambda >= 4.0.0.7",
+      "AWSSDK.S3 >= 4.0.1.5",
       "JPMC.Hackathon.RapMentor.Contract >= 1.0.0"
     ]
   },
@@ -275,6 +310,14 @@
           "AWSSDK.BedrockRuntime": {
             "target": "Package",
             "version": "[4.0.0.7, )"
+          },
+          "AWSSDK.Lambda": {
+            "target": "Package",
+            "version": "[4.0.0.7, )"
+          },
+          "AWSSDK.S3": {
+            "target": "Package",
+            "version": "[4.0.1.5, )"
           }
         },
         "imports": [
@@ -294,11 +337,6 @@
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
-      }
-    },
-    "runtimes": {
-      "linux-x64": {
-        "#import": []
       }
     }
   }

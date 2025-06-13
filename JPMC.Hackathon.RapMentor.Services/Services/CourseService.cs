@@ -179,5 +179,17 @@ namespace JPMC.Hackathon.RapMentor.Services.Services
         {
             return BedrockKBAdapter.GetRagGoalAsync(request);
         }
+        public async Task DeleteAsync(string courseId)
+        {
+            // 1. Load existing course
+            var existingCourse = await _courseRepository.GetAsync(courseId);
+            if (existingCourse == null)
+                throw new KeyNotFoundException($"Course with ID {courseId} not found.");
+
+            var moduleIds = existingCourse.Modules.Select(m => m.Id).ToList();
+            await _courseRepository.DeleteModuleAsync(courseId, moduleIds);
+
+            await _courseRepository.DeleteAsync(courseId);
+        }
     }
 }
