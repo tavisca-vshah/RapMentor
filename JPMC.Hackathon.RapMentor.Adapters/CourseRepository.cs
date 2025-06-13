@@ -1,6 +1,7 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using JPMC.Hackathon.RapMentor.Adapter.Dynamodb.Model;
+using JPMC.Hackathon.RapMentor.Contract.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,9 +69,25 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
             };
         }
 
-        public async Task PublishCourseAsync(string id)
+        public async Task PublishCourseAsync(string id, Course course)
         {
-            throw new NotImplementedException();
+            var dbSetting = await GetDynamoDbSetting();
+            var client = await _dynamoDbClientFactory.GetClientAsync(dbSetting);
+
+            using (var context = _dynamoDbContextProvider.GetDynamoDbContext(client))
+            {
+                var dynamoDBOperationConfig = new BatchWriteConfig
+                {
+                    OverrideTableName = dbSetting.CourseTableName
+                };
+
+                var saveObject = course.ToCourseDBObject();
+                saveObject.Id = id;
+                saveObject.CourseStatus = CourseStatus.Published.ToString();
+                var courseBatch = context.CreateBatchWrite<CourseDataobject>(dynamoDBOperationConfig);
+                courseBatch.AddPutItem(saveObject);
+                await courseBatch.ExecuteAsync();
+            }
         }
 
         public async Task<Contract.Models.Course> GetAsync(string id)

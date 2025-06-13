@@ -9,7 +9,7 @@ namespace JPMC.Hackathon.RapMentor.Adapter.Dynamodb
         Task<List<Course>> GetAllAsync();
         Task<Course> CreateCourseAsync(Course course);
         Task<Course> GetAsync(string id);
-        Task PublishCourseAsync(string id);
+        Task PublishCourseAsync(string id, Course course);
         Task<Course> UpdateCourseAsync(Course course);
     }
 }

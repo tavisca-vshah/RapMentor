@@ -61,7 +61,7 @@ namespace JPMC.Hackathon.RapMentor.Controllers
             return Ok(courseDetial);
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("{id}/publish")]
         public async Task<IActionResult> PublishCourseAsync(string id)
         {
             var courseDetial = await _courseService.PublishCourseAsync(id);
